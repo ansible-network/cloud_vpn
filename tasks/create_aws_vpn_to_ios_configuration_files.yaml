@@ -1,0 +1,10 @@
+---
+- name: Create AWS cloudformation file
+  template:
+    src: aws_vpn_to_ios/aws_vpn.j2
+    dest: "{{ cloud_network_interconnect_output_dir }}/peer_a.config"
+
+- name: Create IOS configuration file
+  template:
+    src: aws_vpn_to_ios/ios.j2
+    dest: "{{ cloud_network_interconnect_output_dir }}/peer_b.config"

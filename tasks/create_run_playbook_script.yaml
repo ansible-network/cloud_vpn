@@ -1,0 +1,4 @@
+---
+- template:
+    src: run_playbook.sh
+    dest: "{{ cloud_network_interconnect_output_dir }}/run_playbook.sh"

@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: {{ cloud_network_interconnect_peer_a_cidr }}
+      Tags:
+        - Key: Name
+          Value: {{ cloud_network_interconnect_name }}-vpc
+  vpngw: 
+    Type: "AWS::EC2::VPNGateway"
+    Properties: 
+      Type: ipsec.1
+      Tags: 
+        - Key: Name
+          Value: {{ cloud_network_interconnect_name }}-vpngw

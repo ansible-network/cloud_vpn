@@ -1,0 +1,10 @@
+---
+- include_tasks: create_output_dir_tree.yaml
+
+- include_tasks: create_configuration_files.yaml
+
+- include_tasks: create_inventory.yaml
+
+- include_tasks: create_playbook.yaml
+
+- include_tasks: create_run_playbook_script.yaml

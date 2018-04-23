@@ -1,0 +1,5 @@
+---
+
+- template:
+    src: "{{ cloud_network_interconnect_provider['type'] }}/playbook.j2"
+    dest: "{{ cloud_network_interconnect_output_dir }}/playbook.yaml"

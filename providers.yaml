@@ -1,0 +1,8 @@
+---
+cloud_network_interconnect_provider:
+  type: aws_vpn_to_ios
+  aws_access_key: foo
+  aws_secret_key: bar
+  host: 10.0.0.1
+  user: cisco
+  password: cisco
