@@ -1,0 +1,7 @@
+---
+cloud_network_interconnect_layout: aws_vpn_to_ios
+cloud_network_interconnect_aws_access_key: foo
+cloud_network_interconnect_aws_secret_key: bar
+cloud_network_interconnect_peer_b_mgmt_ip: 10.0.0.1
+cloud_network_interconnect_peer_b_user: cisco
+cloud_network_interconnect_peer_b_password: cisco
