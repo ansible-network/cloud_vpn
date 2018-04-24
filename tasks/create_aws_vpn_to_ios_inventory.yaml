@@ -2,3 +2,11 @@
 - template:
     src: aws_vpn_to_ios/inventory.j2
     dest: "{{ cloud_network_interconnect_output_dir }}/inventory"
+
+- template:
+    src: aws_vpn_to_ios/peer_a_hostvars.j2
+    dest: "{{ cloud_network_interconnect_output_dir }}/host_vars/peer_a"
+
+- template:
+    src: aws_vpn_to_ios/peer_b_hostvars.j2
+    dest: "{{ cloud_network_interconnect_output_dir }}/host_vars/peer_b"

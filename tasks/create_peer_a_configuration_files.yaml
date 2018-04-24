@@ -1,7 +1,0 @@
----
-- name: Create peer A configuration file
-  template:
-    src: "{{ cloud_network_interconnect_peer_a_type }}.j2"
-    dest: "{{ cloud_network_interconnect_output_dir }}/peer_a.config"
-  vars:
-    cidr: "{{ cloud_network_interconnect_peer_a_cidr }}"

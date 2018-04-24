@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: peer_a
   connection: local
   gather_facts: no
 
@@ -7,5 +7,10 @@
         stack_name: {{ cloud_network_interconnect_name }}-stack
         template: peer_a.config
 
+
+- hosts: peer_b
+  gather_facts: yes
+
+  tasks:
     - ios_config:
         src: peer_b.config

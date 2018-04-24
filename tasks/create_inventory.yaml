@@ -1,2 +1,2 @@
 ---
-- include_tasks: "create_{{ cloud_network_interconnect_provider['type'] }}_inventory.yaml"
+- include_tasks: "create_{{ cloud_network_interconnect_layout }}_inventory.yaml"
