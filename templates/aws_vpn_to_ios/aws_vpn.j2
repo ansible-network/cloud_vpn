@@ -3,14 +3,56 @@ Resources:
   vpc:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: {{ cloud_network_interconnect_peer_a_cidr }}
+      CidrBlock: {{ cloud_network_interconnect_vpc_cidr }}
       Tags:
         - Key: Name
           Value: {{ cloud_network_interconnect_name }}-vpc
-  vpngw: 
-    Type: "AWS::EC2::VPNGateway"
-    Properties: 
+  subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: vpc
+      CidrBlock: {{ cloud_network_interconnect_peer_a_cidr }}
+  privateroutetable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: vpc
+      Tags:
+        - Key: Name
+          Value: {{ cloud_network_interconnect_name }}-privateroutetable
+  customergw:
+    Type: AWS::EC2::CustomerGateway
+    Properties:
       Type: ipsec.1
-      Tags: 
+      BgpAsn: '65000'
+      IpAddress: {{ cloud_network_interconnect_peer_b_public_ip }}
+      Tags:
+        - Key: Name
+          Value: {{ cloud_network_interconnect_name }}-customergw
+  vpngw:
+    Type: AWS::EC2::VPNGateway
+    Properties:
+      Type: ipsec.1
+      Tags:
         - Key: Name
           Value: {{ cloud_network_interconnect_name }}-vpngw
+  vpngwattachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: vpc
+      VpnGatewayId:
+        Ref: vpngw
+  vpn:
+    Type: AWS::EC2::VPNConnection
+    Properties:
+      Type: ipsec.1
+      StaticRoutesOnly: true
+      CustomerGatewayId:
+        Ref: customergw
+      VpnGatewayId:
+        Ref: vpngw
+      Tags:
+        - Key: Name
+          Value: {{ cloud_network_interconnect_name }}-vpn
