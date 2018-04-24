@@ -21,6 +21,13 @@ Resources:
       Tags:
         - Key: Name
           Value: {{ cloud_network_interconnect_name }}-privateroutetable
+  subnetroutetableassociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: privateroutetable
+      SubnetId:
+        Ref: subnet
   customergw:
     Type: AWS::EC2::CustomerGateway
     Properties:
@@ -56,3 +63,17 @@ Resources:
       Tags:
         - Key: Name
           Value: {{ cloud_network_interconnect_name }}-vpn
+  vpnconnectionroute:
+    Type: AWS::EC2::VPNConnectionRoute
+    Properties:
+      DestinationCidrBlock: {{ cloud_network_interconnect_peer_b_cidr }}
+      VpnConnectionId:
+        Ref: vpn
+  vpngwroutepropagation:
+    Type: AWS::EC2::VPNGatewayRoutePropagation
+    DependsOn: vpngwattachment
+    Properties:
+      RouteTableIds:
+        - Ref: privateroutetable
+      VpnGatewayId:
+        Ref: vpngw
