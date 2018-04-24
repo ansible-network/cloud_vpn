@@ -1,6 +1,8 @@
 ---
-#cloud_network_interconnect_peer_a_cidr: 172.16.31.0/16
-#cloud_network_interconnect_peer_a_public_ip: 172.16.31.1
+cloud_network_interconnect_layout: aws_vpn_to_ios
 
 cloud_network_interconnect_peer_b_public_ip: 1.1.1.1
 cloud_network_interconnect_peer_b_cidr: 192.168.0.0/24
+cloud_network_interconnect_peer_b_mgmt_ip: 10.0.0.1
+cloud_network_interconnect_peer_b_user: cisco
+cloud_network_interconnect_peer_b_password: cisco
