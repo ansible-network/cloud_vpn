@@ -5,3 +5,4 @@ cloud_network_interconnect_name: cni
 cloud_network_interconnect_vpc_cidr: 10.0.0.0/16
 cloud_network_interconnect_peer_a_cidr: 10.0.0.0/24
 cloud_network_interconnect_state: present
+cloud_network_interconnect_external_interface: GigabitEthernet1

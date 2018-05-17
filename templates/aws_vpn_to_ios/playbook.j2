@@ -1,11 +1,14 @@
 - hosts: peer_a
-  connection: local
   gather_facts: no
 
   tasks:
     - cloudformation:
         stack_name: {{ cloud_network_interconnect_name }}-stack
         template: peer_a.config
+
+    - ec2_vpc_vpn_facts:
+        filters:
+          "tag:Name": {{ cloud_network_interconnect_name }}-vpn
 
 
 - hosts: peer_b

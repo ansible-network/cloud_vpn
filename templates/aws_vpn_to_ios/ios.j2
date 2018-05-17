@@ -1,41 +1,3 @@
-! Amazon Web Services
-! Virtual Private Cloud
-
-! AWS utilizes unique identifiers to manipulate the configuration of
-! a VPN Connection. Each VPN Connection is assigned an identifier and is
-! associated with two other identifiers, namely the
-! Customer Gateway Identifier and Virtual Private Gateway Identifier.
-!
-! Your VPN Connection ID 		  : vpn-0508b70bb0f5e37ac
-! Your Virtual Private Gateway ID         : vgw-01cbc1cd91aceb8f8
-! Your Customer Gateway ID		  : cgw-05de62244f0e241d3
-!
-!
-! This configuration consists of two tunnels. Both tunnels must be
-! configured on your Customer Gateway.
-!
-! You may need to populate these values throughout the config based on your setup:
-! <interface_name/private_IP_on_outside_interface> - External interface of the CSR
-
-! --------------------------------------------------------------------------------
-! IPSec Tunnel #1
-! --------------------------------------------------------------------------------
-! #1: Internet Key Exchange (IKE) Configuration
-!
-! A policy is established for the supported ISAKMP encryption,
-! authentication, Diffie-Hellman, lifetime, and key parameters.
-! Please note, these sample configurations are for the minimum requirement of AES128, SHA1, and DH Group 2.
-! You will need to modify these sample configuration files to take advantage of AES256, SHA256, or other DH groups like 2, 14-18, 22, 23, and 24.
-! Higher parameters are only available for VPNs of category "VPN," and not for "VPN-Classic".
-! The address of the external interface for your customer gateway must be a static address.
-! Your customer gateway may reside behind a device performing network address translation (NAT).
-! To ensure that NAT traversal (NAT-T) can function, you must adjust your firewall !rules to unblock UDP port 4500. If not behind NAT, we recommend disabling NAT-T.
-!
-! Note that there are a global list of ISAKMP policies, each identified by
-! sequence number. This policy is defined as #200, which may conflict with
-! an existing policy using the same number. If so, we recommend changing
-! the sequence number to avoid conflicts.
-!
 crypto isakmp policy 200
   encryption aes 128
   authentication pre-share
@@ -44,109 +6,48 @@ crypto isakmp policy 200
   hash sha
 exit
 
-! The ISAKMP keyring stores the Pre Shared Key used to authenticate the
-! tunnel endpoints.
-!
-crypto keyring keyring-vpn-0508b70bb0f5e37ac-0
-	local-address <interface_name/private_IP_on_outside_interface>
-  pre-shared-key address 13.58.188.216 key SfudIseFjkfvGK_aYPL2cIV316EV8PMg
+crypto keyring {{ cloud_network_interconnect_name }}-keyring-0
+	local-address {{ cloud_network_interconnect_external_interface }}
+  pre-shared-key address {{ cloud_network_interconnect_peer_a_public_ip }} key {{ cloud_network_interconnect_psk }}
 exit
 
-! An ISAKMP profile is used to associate the keyring with the particular
-! endpoint.
-!
-crypto isakmp profile isakmp-vpn-0508b70bb0f5e37ac-0
-  local-address <interface_name/private_IP_on_outside_interface>
-  match identity address 13.58.188.216
-  keyring keyring-vpn-0508b70bb0f5e37ac-0
+crypto isakmp profile {{ cloud_network_interconnect_name }}-isakmp-0
+  local-address {{ cloud_network_interconnect_external_interface }}
+  match identity address {{ cloud_network_interconnect_peer_a_public_ip }}
+  keyring {{ cloud_network_interconnect_name }}-keyring-0
 exit
 
-! #2: IPSec Configuration
-!
-! The IPSec transform set defines the encryption, authentication, and IPSec
-! mode parameters.
-! Please note, you may use these additionally supported IPSec parameters for encryption like AES256 and other DH groups like 2, 5, 14-18, 22, 23, and 24.
-! Higher parameters are only available for VPNs of category "VPN," and not for "VPN-Classic".
-!
-crypto ipsec transform-set ipsec-prop-vpn-0508b70bb0f5e37ac-0 esp-aes 128 esp-sha-hmac
+crypto ipsec transform-set {{ cloud_network_interconnect_name }}-ipsec-transform-set-0 esp-aes 128 esp-sha-hmac
   mode tunnel
 exit
 
-! The IPSec profile references the IPSec transform set and further defines
-! the Diffie-Hellman group and security association lifetime.
-!
-crypto ipsec profile ipsec-vpn-0508b70bb0f5e37ac-0
+crypto ipsec profile {{ cloud_network_interconnect_name }}-ipsec-profile-0
   set pfs group2
   set security-association lifetime seconds 3600
-  set transform-set ipsec-prop-vpn-0508b70bb0f5e37ac-0
+  set transform-set {{ cloud_network_interconnect_name }}-ipsec-transform-set-0
 exit
 
-! Additional parameters of the IPSec configuration are set here. Note that
-! these parameters are global and therefore impact other IPSec
-! associations.
-! This option instructs the router to clear the "Don't Fragment"
-! bit from packets that carry this bit and yet must be fragmented, enabling
-! them to be fragmented.
-!
 crypto ipsec df-bit clear
 
-! This option enables IPSec Dead Peer Detection, which causes periodic
-! messages to be sent to ensure a Security Association remains operational.
-!
 crypto isakmp keepalive 10 10 on-demand
 
-! This configures the gateway's window for accepting out of order
-! IPSec packets. A larger window can be helpful if too many packets
-! are dropped due to reordering while in transit between gateways.
-!
 crypto ipsec security-association replay window-size 128
 
-! This option instructs the router to fragment the unencrypted packets
-! (prior to encryption).
-!
 crypto ipsec fragmentation before-encryption
 
-
-! --------------------------------------------------------------------------------
-! #3: Tunnel Interface Configuration
-!
-! A tunnel interface is configured to be the logical interface associated
-! with the tunnel. All traffic routed to the tunnel interface will be
-! encrypted and transmitted to the VPC. Similarly, traffic from the VPC
-! will be logically received on this interface.
-!
-! Association with the IPSec security association is done through the
-! "tunnel protection" command.
-!
-! The address of the interface is configured with the setup for your
-! Customer Gateway.  If the address changes, the Customer Gateway and VPN
-! Connection must be recreated with Amazon VPC.
-!
 interface Tunnel1
   ip address 169.254.58.50 255.255.255.252
   ip virtual-reassembly
-  tunnel source <interface_name/private_IP_on_outside_interface>
-  tunnel destination 13.58.188.216
+  tunnel source {{ cloud_network_interconnect_external_interface }}
+  tunnel destination {{ cloud_network_interconnect_peer_a_public_ip }}
   tunnel mode ipsec ipv4
-  tunnel protection ipsec profile ipsec-vpn-0508b70bb0f5e37ac-0
+  tunnel protection ipsec profile {{ cloud_network_interconnect_name }}-ipsec-profile-0
   ! This option causes the router to reduce the Maximum Segment Size of
   ! TCP packets to prevent packet fragmentation.
   ip tcp adjust-mss 1379
   no shutdown
 exit
 
-! ----------------------------------------------------------------------------
-! #4 Static Route Configuration
-!
-! Your Customer Gateway needs to set a static route for the prefix corresponding to your
-! VPC to send traffic over the tunnel interface.
-! An example for a VPC with the prefix 10.0.0.0/16 is provided below:
-! ip route 10.0.0.0 255.255.0.0 Tunnel1 track 100
-!
-! SLA Monitor is used to provide a failover between the two tunnels. If the primary tunnel fails, the redundant tunnel will automatically be used
-! This sla is defined as #100, which may conflict with an existing sla using same number.
-! If so, we recommend changing the sequence number to avoid conflicts.
-!
 ip sla 100
    icmp-echo 169.254.58.49 source-interface Tunnel1
    timeout 1000
@@ -154,150 +55,3 @@ ip sla 100
 exit
 ip sla schedule 100  life forever start-time now
 track 100 ip sla 100 reachability
-! --------------------------------------------------------------------------------
-! --------------------------------------------------------------------------------
-! IPSec Tunnel #2
-! --------------------------------------------------------------------------------
-! #1: Internet Key Exchange (IKE) Configuration
-!
-! A policy is established for the supported ISAKMP encryption,
-! authentication, Diffie-Hellman, lifetime, and key parameters.
-! Please note, these sample configurations are for the minimum requirement of AES128, SHA1, and DH Group 2.
-! You will need to modify these sample configuration files to take advantage of AES256, SHA256, or other DH groups like 2, 14-18, 22, 23, and 24.
-! Higher parameters are only available for VPNs of category "VPN," and not for "VPN-Classic".
-! The address of the external interface for your customer gateway must be a static address.
-! Your customer gateway may reside behind a device performing network address translation (NAT).
-! To ensure that NAT traversal (NAT-T) can function, you must adjust your firewall !rules to unblock UDP port 4500. If not behind NAT, we recommend disabling NAT-T.
-!
-! Note that there are a global list of ISAKMP policies, each identified by
-! sequence number. This policy is defined as #201, which may conflict with
-! an existing policy using the same number. If so, we recommend changing
-! the sequence number to avoid conflicts.
-!
-crypto isakmp policy 201
-  encryption aes 128
-  authentication pre-share
-  group 2
-  lifetime 28800
-  hash sha
-exit
-
-! The ISAKMP keyring stores the Pre Shared Key used to authenticate the
-! tunnel endpoints.
-!
-crypto keyring keyring-vpn-0508b70bb0f5e37ac-1
-	local-address <interface_name/private_IP_on_outside_interface>
-  pre-shared-key address 18.216.203.92 key _yK17Uut8ttPxE7nVU3AMt_FSpzdo1KY
-exit
-
-! An ISAKMP profile is used to associate the keyring with the particular
-! endpoint.
-!
-crypto isakmp profile isakmp-vpn-0508b70bb0f5e37ac-1
-  local-address <interface_name/private_IP_on_outside_interface>
-  match identity address 18.216.203.92
-  keyring keyring-vpn-0508b70bb0f5e37ac-1
-exit
-
-! #2: IPSec Configuration
-!
-! The IPSec transform set defines the encryption, authentication, and IPSec
-! mode parameters.
-! Please note, you may use these additionally supported IPSec parameters for encryption like AES256 and other DH groups like 2, 5, 14-18, 22, 23, and 24.
-! Higher parameters are only available for VPNs of category "VPN," and not for "VPN-Classic".
-!
-crypto ipsec transform-set ipsec-prop-vpn-0508b70bb0f5e37ac-1 esp-aes 128 esp-sha-hmac
-  mode tunnel
-exit
-
-! The IPSec profile references the IPSec transform set and further defines
-! the Diffie-Hellman group and security association lifetime.
-!
-crypto ipsec profile ipsec-vpn-0508b70bb0f5e37ac-1
-  set pfs group2
-  set security-association lifetime seconds 3600
-  set transform-set ipsec-prop-vpn-0508b70bb0f5e37ac-1
-exit
-
-! Additional parameters of the IPSec configuration are set here. Note that
-! these parameters are global and therefore impact other IPSec
-! associations.
-! This option instructs the router to clear the "Don't Fragment"
-! bit from packets that carry this bit and yet must be fragmented, enabling
-! them to be fragmented.
-!
-crypto ipsec df-bit clear
-
-! This option enables IPSec Dead Peer Detection, which causes periodic
-! messages to be sent to ensure a Security Association remains operational.
-!
-crypto isakmp keepalive 10 10 on-demand
-
-! This configures the gateway's window for accepting out of order
-! IPSec packets. A larger window can be helpful if too many packets
-! are dropped due to reordering while in transit between gateways.
-!
-crypto ipsec security-association replay window-size 128
-
-! This option instructs the router to fragment the unencrypted packets
-! (prior to encryption).
-!
-crypto ipsec fragmentation before-encryption
-
-
-! --------------------------------------------------------------------------------
-! #3: Tunnel Interface Configuration
-!
-! A tunnel interface is configured to be the logical interface associated
-! with the tunnel. All traffic routed to the tunnel interface will be
-! encrypted and transmitted to the VPC. Similarly, traffic from the VPC
-! will be logically received on this interface.
-!
-! Association with the IPSec security association is done through the
-! "tunnel protection" command.
-!
-! The address of the interface is configured with the setup for your
-! Customer Gateway.  If the address changes, the Customer Gateway and VPN
-! Connection must be recreated with Amazon VPC.
-!
-interface Tunnel2
-  ip address 169.254.59.78 255.255.255.252
-  ip virtual-reassembly
-  tunnel source <interface_name/private_IP_on_outside_interface>
-  tunnel destination 18.216.203.92
-  tunnel mode ipsec ipv4
-  tunnel protection ipsec profile ipsec-vpn-0508b70bb0f5e37ac-1
-  ! This option causes the router to reduce the Maximum Segment Size of
-  ! TCP packets to prevent packet fragmentation.
-  ip tcp adjust-mss 1379
-  no shutdown
-exit
-
-! ----------------------------------------------------------------------------
-! #4 Static Route Configuration
-!
-! Your Customer Gateway needs to set a static route for the prefix corresponding to your
-! VPC to send traffic over the tunnel interface.
-! An example for a VPC with the prefix 10.0.0.0/16 is provided below:
-! ip route 10.0.0.0 255.255.0.0 Tunnel2 track 200
-!
-! SLA Monitor is used to provide a failover between the two tunnels. If the primary tunnel fails, the redundant tunnel will automatically be used
-! This sla is defined as #200, which may conflict with an existing sla using same number.
-! If so, we recommend changing the sequence number to avoid conflicts.
-!
-ip sla 200
-   icmp-echo 169.254.59.77 source-interface Tunnel2
-   timeout 1000
-   frequency 5
-exit
-ip sla schedule 200  life forever start-time now
-track 200 ip sla 200 reachability
-! --------------------------------------------------------------------------------
-
-
-! Additional Notes and Questions
-!  - Amazon Virtual Private Cloud Getting Started Guide:
-!       http://docs.amazonwebservices.com/AmazonVPC/latest/GettingStartedGuide
-!  - Amazon Virtual Private Cloud Network Administrator Guide:
-!       http://docs.amazonwebservices.com/AmazonVPC/latest/NetworkAdminGuide
-!  - XSL Version: 2009-07-15-1119716
