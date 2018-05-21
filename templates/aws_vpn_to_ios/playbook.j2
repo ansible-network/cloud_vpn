@@ -20,5 +20,9 @@
         cloud_network_interconnect_peer_a_public_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] {{ '}}' }}"
       delegate_to: localhost
 
+    - set_fact:
+        cloud_network_interconnect_peer_a_failover_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][1]['outside_ip_address'] {{ '}}' }}"
+      delegate_to: localhost
+
     - ios_config:
         src: peer_b.config

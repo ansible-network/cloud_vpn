@@ -62,6 +62,9 @@ Resources:
         Ref: vpngw
       VpnTunnelOptionsSpecifications:
         - PreSharedKey: {{ cloud_network_interconnect_psk }}
+          TunnelInsideCidr: {{ cloud_network_interconnect_tunnel_a_cidr }}
+        - PreSharedKey: {{ cloud_network_interconnect_psk }}
+          TunnelInsideCidr: {{ cloud_network_interconnect_tunnel_b_cidr }}
       Tags:
         - Key: Name
           Value: {{ cloud_network_interconnect_name }}-vpn

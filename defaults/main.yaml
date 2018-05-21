@@ -6,3 +6,5 @@ cloud_network_interconnect_vpc_cidr: 10.0.0.0/16
 cloud_network_interconnect_peer_a_cidr: 10.0.0.0/24
 cloud_network_interconnect_state: present
 cloud_network_interconnect_external_interface: GigabitEthernet1
+cloud_network_interconnect_tunnel_a_cidr: 169.254.56.24/30
+cloud_network_interconnect_tunnel_b_cidr: 169.254.57.28/30
