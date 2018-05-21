@@ -6,19 +6,19 @@
         stack_name: {{ cloud_network_interconnect_name }}-stack
         template: peer_a.config
 
-    - ec2_vpc_vpn_facts:
-        filters:
-          tag:Name: {{ cloud_network_interconnect_name }}-vpn
-      register: out
-      
-
-    - set_fact:
-        cloud_network_interconnect_peer_a_public_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] {{ '}}' }}"
-
-
 - hosts: peer_b
   gather_facts: yes
 
   tasks:
+    - ec2_vpc_vpn_facts:
+        filters:
+          tag:Name: {{ cloud_network_interconnect_name }}-vpn
+      register: out
+      delegate_to: localhost
+
+    - set_fact:
+        cloud_network_interconnect_peer_a_public_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] {{ '}}' }}"
+      delegate_to: localhost
+
     - ios_config:
         src: peer_b.config
