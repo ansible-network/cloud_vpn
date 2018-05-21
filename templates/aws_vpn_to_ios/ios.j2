@@ -8,12 +8,12 @@ exit
 
 crypto keyring {{ cloud_network_interconnect_name }}-keyring-0
 	local-address {{ cloud_network_interconnect_external_interface }}
-  pre-shared-key address {{ cloud_network_interconnect_peer_a_public_ip }} key {{ cloud_network_interconnect_psk }}
+  pre-shared-key address {{ '{{' }} cloud_network_interconnect_peer_a_public_ip {{ '}}' }} key {{ cloud_network_interconnect_psk }}
 exit
 
 crypto isakmp profile {{ cloud_network_interconnect_name }}-isakmp-0
   local-address {{ cloud_network_interconnect_external_interface }}
-  match identity address {{ cloud_network_interconnect_peer_a_public_ip }}
+  match identity address {{ '{{' }} cloud_network_interconnect_peer_a_public_ip {{ '}}' }}
   keyring {{ cloud_network_interconnect_name }}-keyring-0
 exit
 
@@ -39,7 +39,7 @@ interface Tunnel1
   ip address 169.254.58.50 255.255.255.252
   ip virtual-reassembly
   tunnel source {{ cloud_network_interconnect_external_interface }}
-  tunnel destination {{ cloud_network_interconnect_peer_a_public_ip }}
+  tunnel destination {{ '{{' }} cloud_network_interconnect_peer_a_public_ip {{ '}}' }}
   tunnel mode ipsec ipv4
   tunnel protection ipsec profile {{ cloud_network_interconnect_name }}-ipsec-profile-0
   ! This option causes the router to reduce the Maximum Segment Size of

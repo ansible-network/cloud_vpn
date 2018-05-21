@@ -8,7 +8,12 @@
 
     - ec2_vpc_vpn_facts:
         filters:
-          "tag:Name": {{ cloud_network_interconnect_name }}-vpn
+          tag:Name: {{ cloud_network_interconnect_name }}-vpn
+      register: out
+      
+
+    - set_fact:
+        cloud_network_interconnect_peer_a_public_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] {{ '}}' }}"
 
 
 - hosts: peer_b

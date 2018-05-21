@@ -1,2 +1,3 @@
 *.retry
 output/
+vars.yaml
