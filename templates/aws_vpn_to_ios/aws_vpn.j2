@@ -60,6 +60,8 @@ Resources:
         Ref: customergw
       VpnGatewayId:
         Ref: vpngw
+      VpnTunnelOptionsSpecifications:
+        - PreSharedKey: {{ cloud_network_interconnect_psk }}
       Tags:
         - Key: Name
           Value: {{ cloud_network_interconnect_name }}-vpn
