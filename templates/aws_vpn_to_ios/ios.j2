@@ -7,7 +7,7 @@ crypto isakmp policy 200
 exit
 
 crypto keyring {{ cloud_network_interconnect_name }}-keyring-0
-	local-address {{ cloud_network_interconnect_external_interface }}
+  local-address {{ cloud_network_interconnect_external_interface }}
   pre-shared-key address {{ '{{' }} cloud_network_interconnect_peer_a_public_ip {{ '}}' }} key {{ cloud_network_interconnect_psk }}
 exit
 
