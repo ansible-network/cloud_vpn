@@ -49,7 +49,7 @@ interface Tunnel1
 exit
 
 ip sla 100
-   icmp-echo {{ cloud_network_interconnect_tunnel_a_cidr | ipaddr('net') | ipaddr('2') | ipaddr('address') }} source-interface Tunnel1
+   icmp-echo {{ cloud_network_interconnect_tunnel_a_cidr | ipaddr('net') | ipaddr('1') | ipaddr('address') }} source-interface Tunnel1
    timeout 5000
    frequency 5
 exit
