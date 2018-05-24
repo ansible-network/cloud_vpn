@@ -2,4 +2,4 @@
 
 - template:
     src: "{{ cloud_network_interconnect_layout }}/playbook.j2"
-    dest: "{{ cloud_network_interconnect_output_dir }}/playbook.yaml"
+    dest: "{{ cloud_network_interconnect_output_dir }}/project/playbook.yaml"

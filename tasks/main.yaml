@@ -7,4 +7,6 @@
 
 - include_tasks: create_playbook.yaml
 
+- include_tasks: create_ansible_runner_env_files.yaml
+
 - include_tasks: create_run_playbook_script.yaml
