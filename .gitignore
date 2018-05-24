@@ -1,3 +1,4 @@
 *.retry
 output/
 vars.yaml
+secrets.yaml
