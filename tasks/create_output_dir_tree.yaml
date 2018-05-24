@@ -4,5 +4,6 @@
     state: directory
   loop:
     - "{{ cloud_network_interconnect_output_dir }}"
-    - "{{ cloud_network_interconnect_output_dir }}/host_vars"
-    - "{{ cloud_network_interconnect_output_dir }}/group_vars"
+    - "{{ cloud_network_interconnect_output_dir }}/inventory"
+    - "{{ cloud_network_interconnect_output_dir }}/inventory/host_vars"
+    - "{{ cloud_network_interconnect_output_dir }}/inventory/group_vars"
