@@ -113,3 +113,6 @@ ip sla 200
 exit
 ip sla schedule 200  life forever start-time now
 track 200 ip sla 200 reachability
+
+ip route {{ cloud_network_interconnect_peer_a_cidr | ipaddr('network') }} {{ cloud_network_interconnect_peer_a_cidr | ipaddr('netmask') }} Tunnel1 track 100
+ip route {{ cloud_network_interconnect_peer_a_cidr | ipaddr('network') }} {{ cloud_network_interconnect_peer_a_cidr | ipaddr('netmask') }} Tunnel2 track 200
