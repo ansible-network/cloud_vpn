@@ -1,4 +1,2 @@
-*.retry
-output/
-vars.yaml
-secrets.yaml
+tests/*.retry
+tests/output/

@@ -4,4 +4,4 @@
 
   tasks:
     - include_role:
-        name: cloud-network-interconnect
+        name: cloud-vpn
