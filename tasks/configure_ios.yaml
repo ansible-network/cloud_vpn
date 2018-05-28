@@ -8,10 +8,10 @@
   register: out
 
 - set_fact:
-    cloud_network_interconnect_peer_a_public_ip: "{{ out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address']  }}"
+    cloud_vpn_peer_a_public_ip: "{{ out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address']  }}"
 
 - set_fact:
-    cloud_network_interconnect_peer_a_failover_ip: "{{ out['vpn_connections'][0]['vgw_telemetry'][1]['outside_ip_address'] }}"
+    cloud_vpn_peer_a_failover_ip: "{{ out['vpn_connections'][0]['vgw_telemetry'][1]['outside_ip_address'] }}"
 
 - ios_config:
     src: aws_vpn_to_ios/peer_b.config.j2

@@ -1,2 +1,2 @@
 ---
-- include_tasks: "create_{{ cloud_network_interconnect_layout }}_ansible_runner_env_files.yaml"
+- include_tasks: "create_{{ cloud_vpn_layout }}_ansible_runner_env_files.yaml"

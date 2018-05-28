@@ -2,9 +2,9 @@
 - name: Create Ansible runner settings file
   template:
     src: aws_vpn_to_ios/ansible_runner_env_settings
-    dest: "{{ cloud_network_interconnect_output_dir }}/env/settings"
+    dest: "{{ cloud_vpn_output_dir }}/env/settings"
 
 - name: Create Ansible runner extravars file
   template:
     src: aws_vpn_to_ios/ansible_runner_env_extravars
-    dest: "{{ cloud_network_interconnect_output_dir }}/env/extravars"
+    dest: "{{ cloud_vpn_output_dir }}/env/extravars"

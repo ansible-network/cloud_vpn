@@ -3,16 +3,16 @@ Resources:
   vpc:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: {{ cloud_network_interconnect_vpc_cidr }}
+      CidrBlock: {{ cloud_vpn_vpc_cidr }}
       Tags:
         - Key: Name
-          Value: {{ cloud_network_interconnect_name }}-vpc
+          Value: {{ cloud_vpn_name }}-vpc
   subnet:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId:
         Ref: vpc
-      CidrBlock: {{ cloud_network_interconnect_peer_a_cidr }}
+      CidrBlock: {{ cloud_vpn_peer_a_cidr }}
   privateroutetable:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -20,7 +20,7 @@ Resources:
         Ref: vpc
       Tags:
         - Key: Name
-          Value: {{ cloud_network_interconnect_name }}-privateroutetable
+          Value: {{ cloud_vpn_name }}-privateroutetable
   subnetroutetableassociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -33,17 +33,17 @@ Resources:
     Properties:
       Type: ipsec.1
       BgpAsn: '65000'
-      IpAddress: {{ cloud_network_interconnect_peer_b_public_ip }}
+      IpAddress: {{ cloud_vpn_peer_b_public_ip }}
       Tags:
         - Key: Name
-          Value: {{ cloud_network_interconnect_name }}-customergw
+          Value: {{ cloud_vpn_name }}-customergw
   vpngw:
     Type: AWS::EC2::VPNGateway
     Properties:
       Type: ipsec.1
       Tags:
         - Key: Name
-          Value: {{ cloud_network_interconnect_name }}-vpngw
+          Value: {{ cloud_vpn_name }}-vpngw
   vpngwattachment:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
@@ -61,17 +61,17 @@ Resources:
       VpnGatewayId:
         Ref: vpngw
       VpnTunnelOptionsSpecifications:
-        - PreSharedKey: {{ cloud_network_interconnect_psk }}
-          TunnelInsideCidr: {{ cloud_network_interconnect_tunnel_a_cidr }}
-        - PreSharedKey: {{ cloud_network_interconnect_psk }}
-          TunnelInsideCidr: {{ cloud_network_interconnect_tunnel_b_cidr }}
+        - PreSharedKey: {{ cloud_vpn_psk }}
+          TunnelInsideCidr: {{ cloud_vpn_tunnel_a_cidr }}
+        - PreSharedKey: {{ cloud_vpn_psk }}
+          TunnelInsideCidr: {{ cloud_vpn_tunnel_b_cidr }}
       Tags:
         - Key: Name
-          Value: {{ cloud_network_interconnect_name }}-vpn
+          Value: {{ cloud_vpn_name }}-vpn
   vpnconnectionroute:
     Type: AWS::EC2::VPNConnectionRoute
     Properties:
-      DestinationCidrBlock: {{ cloud_network_interconnect_peer_b_cidr }}
+      DestinationCidrBlock: {{ cloud_vpn_peer_b_cidr }}
       VpnConnectionId:
         Ref: vpn
   vpngwroutepropagation:

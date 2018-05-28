@@ -3,9 +3,9 @@
     path: "{{ item }}"
     state: directory
   loop:
-    - "{{ cloud_network_interconnect_output_dir }}"
-    - "{{ cloud_network_interconnect_output_dir }}/project"
-    - "{{ cloud_network_interconnect_output_dir }}/env"
-    - "{{ cloud_network_interconnect_output_dir }}/inventory"
-    - "{{ cloud_network_interconnect_output_dir }}/inventory/host_vars"
-    - "{{ cloud_network_interconnect_output_dir }}/inventory/group_vars"
+    - "{{ cloud_vpn_output_dir }}"
+    - "{{ cloud_vpn_output_dir }}/project"
+    - "{{ cloud_vpn_output_dir }}/env"
+    - "{{ cloud_vpn_output_dir }}/inventory"
+    - "{{ cloud_vpn_output_dir }}/inventory/host_vars"
+    - "{{ cloud_vpn_output_dir }}/inventory/group_vars"

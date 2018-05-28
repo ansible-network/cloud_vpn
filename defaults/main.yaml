@@ -1,10 +1,10 @@
 ---
-cloud_network_interconnect_output_dir: "{{ playbook_dir }}/output"
+cloud_vpn_output_dir: "{{ playbook_dir }}/output"
 
-cloud_network_interconnect_name: cni
-cloud_network_interconnect_vpc_cidr: 10.0.0.0/16
-cloud_network_interconnect_peer_a_cidr: 10.0.0.0/24
-cloud_network_interconnect_state: present
-cloud_network_interconnect_external_interface: GigabitEthernet1
-cloud_network_interconnect_tunnel_a_cidr: 169.254.56.24/30
-cloud_network_interconnect_tunnel_b_cidr: 169.254.56.28/30
+cloud_vpn_name: cni
+cloud_vpn_vpc_cidr: 10.0.0.0/16
+cloud_vpn_peer_a_cidr: 10.0.0.0/24
+cloud_vpn_state: present
+cloud_vpn_external_interface: GigabitEthernet1
+cloud_vpn_tunnel_a_cidr: 169.254.56.24/30
+cloud_vpn_tunnel_b_cidr: 169.254.56.28/30
