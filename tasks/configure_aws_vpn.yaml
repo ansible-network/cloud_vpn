@@ -1,6 +1,0 @@
-- cloudformation:
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
-    region: "{{ aws_region  }}"
-    stack_name: "{{ name }}-stack"
-    template_body: "{{ lookup('template', 'templates/aws_vpn_to_ios/peer_a.config.j2') }}"
