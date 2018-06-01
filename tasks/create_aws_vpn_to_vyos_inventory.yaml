@@ -1,0 +1,12 @@
+---
+- template:
+    src: aws_vpn_to_vyos/inventory.j2
+    dest: "{{ cloud_vpn_output_dir }}/inventory/hosts"
+
+- template:
+    src: aws_vpn_to_vyos/peer_a_hostvars.j2
+    dest: "{{ cloud_vpn_output_dir }}/inventory/host_vars/peer_a"
+
+- template:
+    src: aws_vpn_to_vyos/peer_b_hostvars.j2
+    dest: "{{ cloud_vpn_output_dir }}/inventory/host_vars/peer_b"
