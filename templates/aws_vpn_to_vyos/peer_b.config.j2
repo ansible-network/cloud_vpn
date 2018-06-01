@@ -31,3 +31,7 @@ set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' 
 set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' }} local-address {{ cloud_vpn_peer_b_private_ip }}
 set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' }} vti bind vti1
 set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' }} vti esp-group {{ cloud_vpn_name }}-esp-group
+set vpn ipsec nat-traversal enable
+
+set protocols static interface-route {{ cloud_vpn_vpc_cidr }} next-hop-interface vti0 distance 1
+set protocols static interface-route {{ cloud_vpn_vpc_cidr }} next-hop-interface vti1 distance 2
