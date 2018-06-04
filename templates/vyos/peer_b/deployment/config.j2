@@ -16,7 +16,7 @@ set vpn ipsec ike-group {{ cloud_vpn_name }}-ike-group proposal 1 dh-group 2
 set vpn ipsec ike-group {{ cloud_vpn_name }}-ike-group proposal 1 encryption aes128
 set vpn ipsec ike-group {{ cloud_vpn_name }}-ike-group proposal 1 hash sha1
 
-set vpn ipsec ipsec-interfaces interface {{ cloud_vpn_outside_interface }}
+set vpn ipsec ipsec-interfaces interface {{ cloud_vpn_peer_b_outside_interface }}
 set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_public_ip {{ '}}' }} authentication mode pre-shared-secret
 set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_public_ip {{ '}}' }} authentication pre-shared-secret {{ cloud_vpn_psk }}
 set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_public_ip {{ '}}' }} connection-type initiate
@@ -33,5 +33,5 @@ set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' 
 set vpn ipsec site-to-site peer {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' }} vti esp-group {{ cloud_vpn_name }}-esp-group
 set vpn ipsec nat-traversal enable
 
-set protocols static interface-route {{ cloud_vpn_vpc_cidr }} next-hop-interface vti0 distance 1
-set protocols static interface-route {{ cloud_vpn_vpc_cidr }} next-hop-interface vti1 distance 2
+set protocols static interface-route {{ cloud_vpn_peer_a_cidr }} next-hop-interface vti0 distance 1
+set protocols static interface-route {{ cloud_vpn_peer_a_cidr }} next-hop-interface vti1 distance 2

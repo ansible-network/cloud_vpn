@@ -1,14 +1,3 @@
-- hosts: peer_a
-  gather_facts: no
-
-  tasks:
-    - cloudformation:
-        aws_access_key: "{{ '{{' }} aws_access_key {{ '}}' }}"
-        aws_secret_key: "{{ '{{' }} aws_secret_key {{ '}}' }}"
-        region: "{{ '{{' }} aws_region {{ '}}' }}"
-        stack_name: {{ cloud_vpn_name }}-stack
-        template: peer_a.config
-
 - hosts: peer_b
   gather_facts: yes
 
@@ -30,5 +19,5 @@
         cloud_vpn_peer_a_failover_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][1]['outside_ip_address'] {{ '}}' }}"
       delegate_to: localhost
 
-    - vyos_config:
+    - ios_config:
         src: peer_b.config

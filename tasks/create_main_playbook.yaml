@@ -1,0 +1,5 @@
+---
+
+- template:
+    src: main.yaml
+    dest: "{{ cloud_vpn_output_dir }}/project/main.yaml"

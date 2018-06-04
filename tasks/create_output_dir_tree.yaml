@@ -8,4 +8,3 @@
     - "{{ cloud_vpn_output_dir }}/env"
     - "{{ cloud_vpn_output_dir }}/inventory"
     - "{{ cloud_vpn_output_dir }}/inventory/host_vars"
-    - "{{ cloud_vpn_output_dir }}/inventory/group_vars"

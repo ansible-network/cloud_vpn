@@ -1,2 +1,10 @@
 ---
-- include_tasks: "create_{{ cloud_vpn_layout }}_ansible_runner_env_files.yaml"
+- name: Create Ansible runner settings file
+  template:
+    src: ansible_runner/settings
+    dest: "{{ cloud_vpn_output_dir }}/env/settings"
+
+- name: Create Ansible runner extravars file
+  template:
+    src: ansible_runner/extravars
+    dest: "{{ cloud_vpn_output_dir }}/env/extravars"

@@ -1,2 +1,11 @@
 ---
-- include_tasks: create_{{ cloud_vpn_layout }}_configuration_files.yaml
+- name: Create peer A templates
+  template:
+    src: "{{ cloud_vpn_peer_a_type }}/provision.j2"
+    dest: "{{ cloud_vpn_output_dir }}/project/peer_a.provision"
+  when: 
+
+- name: Create peer B templates
+  template:
+    src: "{{ cloud_vpn_peer_a_type }}/config.j2"
+    dest: "{{ cloud_vpn_output_dir }}/project/peer_a.config"

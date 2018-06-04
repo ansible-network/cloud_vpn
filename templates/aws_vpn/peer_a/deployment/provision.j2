@@ -3,7 +3,7 @@ Resources:
   vpc:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: {{ cloud_vpn_vpc_cidr }}
+      CidrBlock: {{ cloud_vpn_peer_a_vpc_cidr }}
       Tags:
         - Key: Name
           Value: {{ cloud_vpn_name }}-vpc

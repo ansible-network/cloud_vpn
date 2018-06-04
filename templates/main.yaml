@@ -1,0 +1,3 @@
+---
+- import_playbook: peer_a.yaml
+- import_playbook: peer_b.yaml

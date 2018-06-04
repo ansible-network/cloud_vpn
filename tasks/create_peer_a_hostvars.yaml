@@ -1,0 +1,4 @@
+---
+- template:
+    src: "{{ cloud_vpn_peer_a_type }}/peer_a/hostvars.j2"
+    dest: "{{ cloud_vpn_output_dir }}/inventory/host_vars/peer_a"
