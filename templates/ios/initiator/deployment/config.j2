@@ -7,13 +7,13 @@ crypto isakmp policy 200
 exit
 
 crypto keyring {{ cloud_vpn_name }}-keyring-0
-  local-address {{ cloud_vpn_peer_b_outside_interface }}
-  pre-shared-key address {{ '{{' }} cloud_vpn_peer_a_public_ip {{ '}}' }} key {{ cloud_vpn_psk }}
+  local-address {{ cloud_vpn_initiator_outside_interface }}
+  pre-shared-key address {{ '{{' }} cloud_vpn_responder_public_ip {{ '}}' }} key {{ cloud_vpn_psk }}
 exit
 
 crypto isakmp profile {{ cloud_vpn_name }}-isakmp-0
-  local-address {{ cloud_vpn_peer_b_outside_interface }}
-  match identity address {{ '{{' }} cloud_vpn_peer_a_public_ip {{ '}}' }}
+  local-address {{ cloud_vpn_initiator_outside_interface }}
+  match identity address {{ '{{' }} cloud_vpn_responder_public_ip {{ '}}' }}
   keyring {{ cloud_vpn_name }}-keyring-0
 exit
 
@@ -38,8 +38,8 @@ crypto ipsec fragmentation before-encryption
 interface Tunnel1
   ip address {{ cloud_vpn_tunnel_a_cidr | ipaddr('net') | ipaddr('2') | ipaddr('address') }} 255.255.255.252
   ip virtual-reassembly
-  tunnel source {{ cloud_vpn_peer_b_outside_interface }}
-  tunnel destination {{ '{{' }} cloud_vpn_peer_a_public_ip {{ '}}' }}
+  tunnel source {{ cloud_vpn_initiator_outside_interface }}
+  tunnel destination {{ '{{' }} cloud_vpn_responder_public_ip {{ '}}' }}
   tunnel mode ipsec ipv4
   tunnel protection ipsec profile {{ cloud_vpn_name }}-ipsec-profile-0
   ! This option causes the router to reduce the Maximum Segment Size of
@@ -65,13 +65,13 @@ crypto isakmp policy 201
 exit
 
 crypto keyring {{ cloud_vpn_name }}-keyring-1
-  local-address {{ cloud_vpn_peer_b_outside_interface }}
-  pre-shared-key address {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' }} key {{ cloud_vpn_psk }}
+  local-address {{ cloud_vpn_initiator_outside_interface }}
+  pre-shared-key address {{ '{{' }} cloud_vpn_responder_failover_ip {{ '}}' }} key {{ cloud_vpn_psk }}
 exit
 
 crypto isakmp profile {{ cloud_vpn_name }}-isakmp-1
-  local-address {{ cloud_vpn_peer_b_outside_interface }}
-  match identity address {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' }}
+  local-address {{ cloud_vpn_initiator_outside_interface }}
+  match identity address {{ '{{' }} cloud_vpn_responder_failover_ip {{ '}}' }}
   keyring {{ cloud_vpn_name }}-keyring-1
 exit
 
@@ -96,8 +96,8 @@ crypto ipsec fragmentation before-encryption
 interface Tunnel2
   ip address {{ cloud_vpn_tunnel_b_cidr | ipaddr('net') | ipaddr('2') | ipaddr('address') }} 255.255.255.252
   ip virtual-reassembly
-  tunnel source {{ cloud_vpn_peer_b_outside_interface }}
-  tunnel destination {{ '{{' }} cloud_vpn_peer_a_failover_ip {{ '}}' }}
+  tunnel source {{ cloud_vpn_initiator_outside_interface }}
+  tunnel destination {{ '{{' }} cloud_vpn_responder_failover_ip {{ '}}' }}
   tunnel mode ipsec ipv4
   tunnel protection ipsec profile {{ cloud_vpn_name }}-ipsec-profile-1
   ! This option causes the router to reduce the Maximum Segment Size of
@@ -114,5 +114,5 @@ exit
 ip sla schedule 200  life forever start-time now
 track 200 ip sla 200 reachability
 
-ip route {{ cloud_vpn_peer_a_cidr | ipaddr('network') }} {{ cloud_vpn_peer_a_cidr | ipaddr('netmask') }} Tunnel1 track 100
-ip route {{ cloud_vpn_peer_a_cidr | ipaddr('network') }} {{ cloud_vpn_peer_a_cidr | ipaddr('netmask') }} Tunnel2 track 200
+ip route {{ cloud_vpn_responder_cidr | ipaddr('network') }} {{ cloud_vpn_responder_cidr | ipaddr('netmask') }} Tunnel1 track 100
+ip route {{ cloud_vpn_responder_cidr | ipaddr('network') }} {{ cloud_vpn_responder_cidr | ipaddr('netmask') }} Tunnel2 track 200

@@ -1,6 +1,0 @@
----
-- name: Create peer A deployment templates
-  template:
-    src: "{{ item }}"
-    dest: "{{ cloud_vpn_output_dir }}/project/peer_a.{{ item | basename | splitext | first }}"
-  loop: "{{ query('fileglob', 'templates/{{ cloud_vpn_peer_a_type }}/peer_a/deployment/*') }}"

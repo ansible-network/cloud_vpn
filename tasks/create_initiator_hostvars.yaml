@@ -1,0 +1,4 @@
+---
+- template:
+    src: "{{ cloud_vpn_initiator_type }}/initiator/hostvars.j2"
+    dest: "{{ cloud_vpn_output_dir }}/inventory/host_vars/initiator"

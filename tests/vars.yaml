@@ -1,9 +1,10 @@
 ---
-cloud_vpn_layout: aws_vpn_to_ios
+cloud_vpn_responder_type: aws_vpn
+cloud_vpn_initiator_type: ios
 
-cloud_vpn_peer_b_public_ip: 18.217.69.92
-cloud_vpn_peer_b_cidr: 192.168.0.0/24
-cloud_vpn_peer_b_mgmt_ip: 10.0.0.1
-cloud_vpn_peer_b_user: cisco
-cloud_vpn_peer_b_password: cisco
+cloud_vpn_initiator_public_ip: 18.217.69.92
+cloud_vpn_initiator_cidr: 192.168.0.0/24
+cloud_vpn_initiator_mgmt_ip: 10.0.0.1
+cloud_vpn_initiator_user: cisco
+cloud_vpn_initiator_password: cisco
 cloud_vpn_aws_region: myawsregion

@@ -1,4 +1,4 @@
-- hosts: peer_a
+- hosts: responder
   gather_facts: no
 
   tasks:
@@ -7,4 +7,4 @@
         aws_secret_key: "{{ '{{' }} aws_secret_key {{ '}}' }}"
         region: "{{ '{{' }} aws_region {{ '}}' }}"
         stack_name: {{ cloud_vpn_name }}-stack
-        template: peer_a.provision
+        template: responder.provision

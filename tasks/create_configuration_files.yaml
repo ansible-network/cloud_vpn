@@ -1,11 +1,11 @@
 ---
-- name: Create peer A templates
+- name: Create responder templates
   template:
-    src: "{{ cloud_vpn_peer_a_type }}/provision.j2"
-    dest: "{{ cloud_vpn_output_dir }}/project/peer_a.provision"
+    src: "{{ cloud_vpn_responder_type }}/provision.j2"
+    dest: "{{ cloud_vpn_output_dir }}/project/responder.provision"
   when: 
 
-- name: Create peer B templates
+- name: Create initiator templates
   template:
-    src: "{{ cloud_vpn_peer_a_type }}/config.j2"
-    dest: "{{ cloud_vpn_output_dir }}/project/peer_a.config"
+    src: "{{ cloud_vpn_responder_type }}/config.j2"
+    dest: "{{ cloud_vpn_output_dir }}/project/responder.config"

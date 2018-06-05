@@ -3,7 +3,7 @@ Resources:
   vpc:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: {{ cloud_vpn_peer_a_vpc_cidr }}
+      CidrBlock: {{ cloud_vpn_responder_vpc_cidr }}
       Tags:
         - Key: Name
           Value: {{ cloud_vpn_name }}-vpc
@@ -12,7 +12,7 @@ Resources:
     Properties:
       VpcId:
         Ref: vpc
-      CidrBlock: {{ cloud_vpn_peer_a_cidr }}
+      CidrBlock: {{ cloud_vpn_responder_cidr }}
   privateroutetable:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -33,7 +33,7 @@ Resources:
     Properties:
       Type: ipsec.1
       BgpAsn: '65000'
-      IpAddress: {{ cloud_vpn_peer_b_public_ip }}
+      IpAddress: {{ cloud_vpn_initiator_public_ip }}
       Tags:
         - Key: Name
           Value: {{ cloud_vpn_name }}-customergw
@@ -71,7 +71,7 @@ Resources:
   vpnconnectionroute:
     Type: AWS::EC2::VPNConnectionRoute
     Properties:
-      DestinationCidrBlock: {{ cloud_vpn_peer_b_cidr }}
+      DestinationCidrBlock: {{ cloud_vpn_initiator_cidr }}
       VpnConnectionId:
         Ref: vpn
   vpngwroutepropagation:

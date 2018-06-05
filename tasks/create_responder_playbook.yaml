@@ -1,0 +1,5 @@
+---
+
+- template:
+    src: "{{ cloud_vpn_responder_type }}/responder/playbook.j2"
+    dest: "{{ cloud_vpn_output_dir }}/project/responder.yaml"

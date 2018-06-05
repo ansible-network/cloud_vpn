@@ -1,19 +1,19 @@
 ---
 - include_tasks: create_output_dir_tree.yaml
 
-- include_tasks: create_peer_a_deployment_templates.yaml
+- include_tasks: create_responder_deployment_templates.yaml
 
-- include_tasks: create_peer_b_deployment_templates.yaml
+- include_tasks: create_initiator_deployment_templates.yaml
 
 - include_tasks: create_inventory.yaml
 
-- include_tasks: create_peer_a_hostvars.yaml
+- include_tasks: create_responder_hostvars.yaml
 
-- include_tasks: create_peer_b_hostvars.yaml
+- include_tasks: create_initiator_hostvars.yaml
 
-- include_tasks: create_peer_a_playbook.yaml
+- include_tasks: create_responder_playbook.yaml
 
-- include_tasks: create_peer_b_playbook.yaml
+- include_tasks: create_initiator_playbook.yaml
 
 - include_tasks: create_main_playbook.yaml
 

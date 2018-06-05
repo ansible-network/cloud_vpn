@@ -1,0 +1,6 @@
+---
+- name: Create responder deployment templates
+  template:
+    src: "{{ item }}"
+    dest: "{{ cloud_vpn_output_dir }}/project/initiator.{{ item | basename | splitext | first }}"
+  loop: "{{ query('fileglob', 'templates/{{ cloud_vpn_initiator_type }}/initiator/deployment/*') }}"
