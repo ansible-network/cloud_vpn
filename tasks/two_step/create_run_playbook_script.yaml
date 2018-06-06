@@ -1,5 +1,5 @@
 ---
 - template:
-    src: run_playbook.sh
+    src: two_step/run_playbook.sh
     dest: "{{ cloud_vpn_output_dir }}/run_playbook.sh"
     mode: 0755

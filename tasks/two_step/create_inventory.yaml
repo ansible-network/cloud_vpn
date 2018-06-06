@@ -1,4 +1,4 @@
 ---
 - template:
-    src: inventory
+    src: two_step/inventory
     dest: "{{ cloud_vpn_output_dir }}/inventory/hosts"
