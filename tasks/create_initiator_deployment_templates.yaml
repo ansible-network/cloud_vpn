@@ -1,5 +1,5 @@
 ---
-- name: Create responder deployment templates
+- name: Create initiator deployment templates
   template:
     src: "{{ item }}"
     dest: "{{ cloud_vpn_output_dir }}/project/initiator.{{ item | basename | splitext | first }}"
