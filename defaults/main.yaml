@@ -8,3 +8,6 @@ cloud_vpn_state: present
 cloud_vpn_initiator_outside_interface: GigabitEthernet1
 cloud_vpn_tunnel_a_cidr: 169.254.56.24/30
 cloud_vpn_tunnel_b_cidr: 169.254.56.28/30
+
+cloud_vpn_responder_public_ip: "{{ '{{' }} cloud_vpn_responder_public_ip {{ '}}' }}"
+cloud_vpn_responder_failover_ip: "{{ '{{' }} cloud_vpn_responder_failover_ip {{ '}}' }}"
