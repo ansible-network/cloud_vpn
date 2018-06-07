@@ -3,4 +3,4 @@
   template:
     src: "{{ item }}"
     dest: "{{ cloud_vpn_output_dir }}/project/responder.{{ item | basename | splitext | first }}"
-  loop: "{{ query('fileglob', 'templates/two_step/{{ cloud_vpn_responder_type }}/responder/deployment/*') }}"
+  loop: "{{ query('fileglob', 'templates/{{ cloud_vpn_responder_type }}/responder/*') }}"
