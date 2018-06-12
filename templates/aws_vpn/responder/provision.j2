@@ -6,7 +6,7 @@ Resources:
       CidrBlock: {{ cloud_vpn_responder_vpc_cidr }}
       Tags:
         - Key: Name
-          Value: {{ cloud_vpn_name }}-vpc
+          Value: {{ cloud_vpn_name }}-responder-vpc
   subnet:
     Type: AWS::EC2::Subnet
     Properties:
@@ -20,7 +20,7 @@ Resources:
         Ref: vpc
       Tags:
         - Key: Name
-          Value: {{ cloud_vpn_name }}-privateroutetable
+          Value: {{ cloud_vpn_name }}-responder-privateroutetable
   subnetroutetableassociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -28,57 +28,3 @@ Resources:
         Ref: privateroutetable
       SubnetId:
         Ref: subnet
-  customergw:
-    Type: AWS::EC2::CustomerGateway
-    Properties:
-      Type: ipsec.1
-      BgpAsn: '65000'
-      IpAddress: {{ cloud_vpn_initiator_public_ip }}
-      Tags:
-        - Key: Name
-          Value: {{ cloud_vpn_name }}-customergw
-  vpngw:
-    Type: AWS::EC2::VPNGateway
-    Properties:
-      Type: ipsec.1
-      Tags:
-        - Key: Name
-          Value: {{ cloud_vpn_name }}-vpngw
-  vpngwattachment:
-    Type: AWS::EC2::VPCGatewayAttachment
-    Properties:
-      VpcId:
-        Ref: vpc
-      VpnGatewayId:
-        Ref: vpngw
-  vpn:
-    Type: AWS::EC2::VPNConnection
-    Properties:
-      Type: ipsec.1
-      StaticRoutesOnly: true
-      CustomerGatewayId:
-        Ref: customergw
-      VpnGatewayId:
-        Ref: vpngw
-      VpnTunnelOptionsSpecifications:
-        - PreSharedKey: {{ cloud_vpn_psk }}
-          TunnelInsideCidr: {{ cloud_vpn_tunnel_a_cidr }}
-        - PreSharedKey: {{ cloud_vpn_psk }}
-          TunnelInsideCidr: {{ cloud_vpn_tunnel_b_cidr }}
-      Tags:
-        - Key: Name
-          Value: {{ cloud_vpn_name }}-vpn
-  vpnconnectionroute:
-    Type: AWS::EC2::VPNConnectionRoute
-    Properties:
-      DestinationCidrBlock: {{ cloud_vpn_initiator_cidr }}
-      VpnConnectionId:
-        Ref: vpn
-  vpngwroutepropagation:
-    Type: AWS::EC2::VPNGatewayRoutePropagation
-    DependsOn: vpngwattachment
-    Properties:
-      RouteTableIds:
-        - Ref: privateroutetable
-      VpnGatewayId:
-        Ref: vpngw

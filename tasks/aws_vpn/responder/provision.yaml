@@ -1,0 +1,7 @@
+---
+- cloudformation:
+    aws_access_key: "{{ cloud_vpn_aws_access_key  }}"
+    aws_secret_key: "{{ cloud_vpn_aws_secret_key  }}"
+    region: "{{ cloud_vpn_aws_region }}"
+    stack_name: "{{ cloud_vpn_name }}-responder-provision-stack"
+    template_body: "{{ lookup('template', 'templates/aws_vpn/responder/provision.j2') }}"
