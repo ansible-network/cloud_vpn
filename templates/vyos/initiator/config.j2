@@ -1,5 +1,5 @@
-set interfaces vti vti0 address {{ cloud_vpn_tunnel_a_cidr | ipaddr('net') | ipaddr('2') }}
-set interfaces vti vti1 address {{ cloud_vpn_tunnel_b_cidr | ipaddr('net') | ipaddr('2') }}
+set interfaces vti vti0 address {{ cloud_vpn_initiator_tunnel_a_private_ip }}/30
+set interfaces vti vti1 address {{ cloud_vpn_initiator_tunnel_b_private_ip }}/30
 
 set vpn ipsec esp-group {{ cloud_vpn_name }}-esp-group compression disable
 set vpn ipsec esp-group {{ cloud_vpn_name }}-esp-group lifetime 3600

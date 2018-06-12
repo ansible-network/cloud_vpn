@@ -36,7 +36,7 @@ crypto ipsec security-association replay window-size 128
 crypto ipsec fragmentation before-encryption
 
 interface Tunnel1
-  ip address {{ cloud_vpn_tunnel_a_cidr | ipaddr('net') | ipaddr('2') | ipaddr('address') }} 255.255.255.252
+  ip address {{ cloud_vpn_responder_tunnel_a_private_ip }} 255.255.255.252
   ip virtual-reassembly
   tunnel source {{ cloud_vpn_initiator_outside_interface }}
   tunnel destination {{ cloud_vpn_responder_public_ip }}
@@ -94,7 +94,7 @@ crypto ipsec security-association replay window-size 128
 crypto ipsec fragmentation before-encryption
 
 interface Tunnel2
-  ip address {{ cloud_vpn_tunnel_b_cidr | ipaddr('net') | ipaddr('2') | ipaddr('address') }} 255.255.255.252
+  ip address {{ cloud_vpn_initiator_tunnel_b_private_ip }} 255.255.255.252
   ip virtual-reassembly
   tunnel source {{ cloud_vpn_initiator_outside_interface }}
   tunnel destination {{ cloud_vpn_responder_failover_ip }}
