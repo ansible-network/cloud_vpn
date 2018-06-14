@@ -37,7 +37,7 @@
   register: out
 
 - set_fact:
-    cloud_vpn_responder_public_ip: "{{ out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] }}"
+    cloud_vpn_responder_ip: "{{ out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] }}"
 
 - set_fact:
     cloud_vpn_responder_failover_ip: "{{ out['vpn_connections'][0]['vgw_telemetry'][1]['outside_ip_address'] }}"
@@ -52,10 +52,10 @@
   register: out
 
 - set_fact:
-    cloud_vpn_initiator_tunnel_a_private_ip: "{{ out['matches'][0]['ip_address'] }}"
+    cloud_vpn_initiator_tunnel_a_ip: "{{ out['matches'][0]['ip_address'] }}"
 
 - set_fact:
-    cloud_vpn_initiator_tunnel_b_private_ip: "{{ out['matches'][1]['ip_address'] }}"
+    cloud_vpn_initiator_tunnel_b_ip: "{{ out['matches'][1]['ip_address'] }}"
 
 - xml:
     xmlstring: "{{ out_cgw_configuration }}"
@@ -64,7 +64,7 @@
   register: out
 
 - set_fact:
-    cloud_vpn_responder_tunnel_a_private_ip: "{{ out['matches'][0]['ip_address'] }}"
+    cloud_vpn_responder_tunnel_a_ip: "{{ out['matches'][0]['ip_address'] }}"
 
 - set_fact:
-    cloud_vpn_responder_tunnel_b_private_ip: "{{ out['matches'][1]['ip_address'] }}"
+    cloud_vpn_responder_tunnel_b_ip: "{{ out['matches'][1]['ip_address'] }}"

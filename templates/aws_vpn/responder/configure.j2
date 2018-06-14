@@ -5,7 +5,7 @@ Resources:
     Properties:
       Type: ipsec.1
       BgpAsn: '65000'
-      IpAddress: {{ cloud_vpn_initiator_public_ip }}
+      IpAddress: {{ cloud_vpn_initiator_ip }}
       Tags:
         - Key: Name
           Value: {{ cloud_vpn_name }}-responder-customergw

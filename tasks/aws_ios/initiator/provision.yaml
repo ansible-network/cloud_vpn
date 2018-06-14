@@ -16,4 +16,4 @@
   register: out
 
 - set_fact:
-    cloud_vpn_initiator_public_ip: "{{ out['instances'][0]['public_ip_address'] }}"
+    cloud_vpn_initiator_ip: "{{ out['instances'][0]['public_ip_address'] }}"

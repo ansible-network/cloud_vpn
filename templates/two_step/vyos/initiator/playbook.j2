@@ -12,7 +12,7 @@
       delegate_to: localhost
 
     - set_fact:
-        cloud_vpn_responder_public_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] {{ '}}' }}"
+        cloud_vpn_responder_ip: "{{ '{{' }} out['vpn_connections'][0]['vgw_telemetry'][0]['outside_ip_address'] {{ '}}' }}"
       delegate_to: localhost
 
     - set_fact:

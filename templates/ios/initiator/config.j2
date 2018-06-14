@@ -8,12 +8,12 @@ exit
 
 crypto keyring {{ cloud_vpn_name }}-keyring-0
   local-address {{ cloud_vpn_initiator_outside_interface }}
-  pre-shared-key address {{ cloud_vpn_responder_public_ip }} key {{ cloud_vpn_psk }}
+  pre-shared-key address {{ cloud_vpn_responder_ip }} key {{ cloud_vpn_psk }}
 exit
 
 crypto isakmp profile {{ cloud_vpn_name }}-isakmp-0
   local-address {{ cloud_vpn_initiator_outside_interface }}
-  match identity address {{ cloud_vpn_responder_public_ip }}
+  match identity address {{ cloud_vpn_responder_ip }}
   keyring {{ cloud_vpn_name }}-keyring-0
 exit
 
@@ -36,10 +36,10 @@ crypto ipsec security-association replay window-size 128
 crypto ipsec fragmentation before-encryption
 
 interface Tunnel1
-  ip address {{ cloud_vpn_initiator_tunnel_a_private_ip }} 255.255.255.252
+  ip address {{ cloud_vpn_initiator_tunnel_a_ip }} 255.255.255.252
   ip virtual-reassembly
   tunnel source {{ cloud_vpn_initiator_outside_interface }}
-  tunnel destination {{ cloud_vpn_responder_public_ip }}
+  tunnel destination {{ cloud_vpn_responder_ip }}
   tunnel mode ipsec ipv4
   tunnel protection ipsec profile {{ cloud_vpn_name }}-ipsec-profile-0
   ! This option causes the router to reduce the Maximum Segment Size of
@@ -49,7 +49,7 @@ interface Tunnel1
 exit
 
 ip sla 100
-   icmp-echo {{ cloud_vpn_responder_tunnel_a_private_ip }} source-interface Tunnel1
+   icmp-echo {{ cloud_vpn_responder_tunnel_a_ip }} source-interface Tunnel1
    timeout 5000
    frequency 5
 exit
@@ -94,7 +94,7 @@ crypto ipsec security-association replay window-size 128
 crypto ipsec fragmentation before-encryption
 
 interface Tunnel2
-  ip address {{ cloud_vpn_initiator_tunnel_b_private_ip }} 255.255.255.252
+  ip address {{ cloud_vpn_initiator_tunnel_b_ip }} 255.255.255.252
   ip virtual-reassembly
   tunnel source {{ cloud_vpn_initiator_outside_interface }}
   tunnel destination {{ cloud_vpn_responder_failover_ip }}
@@ -107,7 +107,7 @@ interface Tunnel2
 exit
 
 ip sla 200
-   icmp-echo {{ cloud_vpn_responder_tunnel_b_private_ip }} source-interface Tunnel2
+   icmp-echo {{ cloud_vpn_responder_tunnel_b_ip }} source-interface Tunnel2
    timeout 5000
    frequency 5
 exit

@@ -1,7 +1,7 @@
 ---
 - add_host:
     name: initiator
-    ansible_host: "{{ cloud_vpn_initiator_public_ip }}"
+    ansible_host: "{{ cloud_vpn_initiator_ip }}"
     ansible_user: "{{ cloud_vpn_initiator_user }}"
     ansible_connection: network_cli
     ansible_network_os: vyos
