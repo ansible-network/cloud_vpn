@@ -4,8 +4,8 @@ cloud-vpn
 This role allows to create VPN IPSEC site-to-site tunnels between cloud providers and network devices.
 It only supports static routing (for now).
 
-Example playbook for an on-premise VyOS device and AWS VPN
-----------------------------------------------------------
+Example playbook for VPN between an on-premise VyOS device and AWS VPN
+----------------------------------------------------------------------
 
 ```
 - hosts: localhost
@@ -32,8 +32,8 @@ Example playbook for an on-premise VyOS device and AWS VPN
         name: cloud-vpn
 ```
 
-Example playbook for a dynamically provisioned on AWS VyOS VM and AWS VPN
--------------------------------------------------------------------------
+Example playbook for VPN between a dynamically provisioned AWS VyOS VM and AWS VPN
+----------------------------------------------------------------------------------
 
 ```
 - hosts: localhost
@@ -61,8 +61,8 @@ Example playbook for a dynamically provisioned on AWS VyOS VM and AWS VPN
         name: cloud-vpn
 ```
 
-Example playbook for an on-premise CSR device and AWS VPN
----------------------------------------------------------
+Example playbook for VPN between an on-premise CSR device and AWS VPN
+---------------------------------------------------------------------
 
 ```
 - hosts: localhost
@@ -87,8 +87,8 @@ Example playbook for an on-premise CSR device and AWS VPN
         name: cloud-vpn
 ```
 
-Example playbook for a dynamically provisioned on AWS CSR VM  and AWS VPN
--------------------------------------------------------------------------
+Example playbook for VPN between a dynamically provisioned AWS CSR VM and AWS VPN
+---------------------------------------------------------------------------------
 
 ```
 - hosts: localhost
