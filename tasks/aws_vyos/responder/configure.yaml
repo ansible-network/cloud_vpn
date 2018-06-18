@@ -1,0 +1,11 @@
+---
+- add_host:
+    name: responder
+    ansible_host: "{{ cloud_vpn_responder_ip }}"
+    ansible_user: "{{ cloud_vpn_responder_user }}"
+    ansible_connection: network_cli
+    ansible_network_os: vyos
+
+- vyos_config:
+    src: "vyos/responder/{{ cloud_vpn_initiator_type }}/configure.j2"
+  delegate_to: responder

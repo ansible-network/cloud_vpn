@@ -1,13 +1,17 @@
 ---
 cloud_vpn_output_dir: "{{ playbook_dir }}/output"
-
 cloud_vpn_name: cvpn
-cloud_vpn_responder_vpc_cidr: 10.0.0.0/16
-cloud_vpn_responder_cidr: 10.0.0.0/24
-cloud_vpn_state: present
-cloud_vpn_initiator_outside_interface: GigabitEthernet1
+
 cloud_vpn_tunnel_a_cidr: 169.254.56.24/30
 cloud_vpn_tunnel_b_cidr: 169.254.56.28/30
 
+cloud_vpn_responder_vpc_cidr: 10.0.0.0/16
+cloud_vpn_responder_cidr: 10.0.0.0/24
 cloud_vpn_responder_ip: "{{ '{{' }} cloud_vpn_responder_ip {{ '}}' }}"
 cloud_vpn_responder_failover_ip: "{{ '{{' }} cloud_vpn_responder_failover_ip {{ '}}' }}"
+cloud_vpn_responder_tunnel_a_ip: 169.254.56.25
+
+cloud_vpn_initiator_outside_interface: GigabitEthernet1
+cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
+cloud_vpn_initiator_cidr: 192.168.0.0/24
+cloud_vpn_initiator_tunnel_a_ip: 169.254.56.26
