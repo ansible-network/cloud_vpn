@@ -17,6 +17,8 @@ set vpn ipsec ike-group {{ cloud_vpn_name }}-ike-group proposal 1 encryption aes
 set vpn ipsec ike-group {{ cloud_vpn_name }}-ike-group proposal 1 hash sha1
 
 set vpn ipsec ipsec-interfaces interface {{ cloud_vpn_initiator_outside_interface }}
+
+set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} authentication id {{ cloud_vpn_initiator_ip }}
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} authentication mode pre-shared-secret
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} authentication pre-shared-secret {{ cloud_vpn_psk }}
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} connection-type initiate
@@ -24,6 +26,7 @@ set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} ike-group {{ cloud_
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} local-address {{ cloud_vpn_initiator_private_ip }}
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} vti bind vti0
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_ip }} vti esp-group {{ cloud_vpn_name }}-esp-group
+set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} authentication id {{ cloud_vpn_initiator_ip }}
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} authentication mode pre-shared-secret
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} authentication pre-shared-secret {{ cloud_vpn_psk }}
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} connection-type initiate
@@ -31,6 +34,7 @@ set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} ike-group 
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} local-address {{ cloud_vpn_initiator_private_ip }}
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} vti bind vti1
 set vpn ipsec site-to-site peer {{ cloud_vpn_responder_failover_ip }} vti esp-group {{ cloud_vpn_name }}-esp-group
+
 set vpn ipsec nat-traversal enable
 
 set protocols static interface-route {{ cloud_vpn_responder_cidr }} next-hop-interface vti0 distance 1
