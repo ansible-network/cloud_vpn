@@ -74,7 +74,7 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: {{ cloud_vpn_aws_vyos_image_id }}
-      KeyName: {{ cloud_vpn_aws_key_name }}
+      KeyName: {{ cloud_vpn_initiator_key_name }}
       NetworkInterfaces:
         - AssociatePublicIpAddress: "true"
           PrivateIpAddress: {{ cloud_vpn_initiator_private_ip }}

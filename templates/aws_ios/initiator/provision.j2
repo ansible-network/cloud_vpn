@@ -74,7 +74,7 @@ Resources:
     Properties:
       InstanceType: c4.large
       ImageId: {{ cloud_vpn_aws_ios_image_id }}
-      KeyName: {{ cloud_vpn_aws_key_name }}
+      KeyName: {{ cloud_vpn_initiator_key_name }}
       NetworkInterfaces:
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
