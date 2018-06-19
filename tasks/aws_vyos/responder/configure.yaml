@@ -7,5 +7,5 @@
     ansible_network_os: vyos
 
 - vyos_config:
-    src: "vyos/responder/{{ cloud_vpn_initiator_type }}/configure.j2"
+    src: "vyos/responder/{{ peer_type_to_config[cloud_vpn_initiator_type] }}/configure.j2"
   delegate_to: responder
