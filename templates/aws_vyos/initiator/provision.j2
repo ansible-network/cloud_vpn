@@ -73,7 +73,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      ImageId: {{ cloud_vpn_aws_vyos_image_id }}
+      ImageId: {{ cloud_vpn_initiator_image_id }}
       KeyName: {{ cloud_vpn_initiator_key_name }}
       NetworkInterfaces:
         - AssociatePublicIpAddress: "true"
