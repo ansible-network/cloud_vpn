@@ -1,8 +1,22 @@
 ---
 
+- block:
+    - os_networks_facts:
+        cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
+        name: "{{ cloud_vpn_initiator_vpc_id }}"
+
+    - set_fact:
+        cloud_vpn_initiator_subnet_id: "{{ openstack_networks[0]['subnets'][0] }}"
+
+    - template:
+        src: openstack_vyos/initiator/provision_in_existing_vpc.j2
+        dest: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+  when: cloud_vpn_initiator_vpc_id is defined
+
 - template:
     src: openstack_vyos/initiator/provision.j2
     dest: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+  when: cloud_vpn_initiator_vpc_id is not defined
 
 - os_stack:
     cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
