@@ -1,0 +1,43 @@
+heat_template_version: 2015-04-30
+
+resources:
+  security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: {{ cloud_vpn_name }}-initiator-security-group
+      rules:
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: tcp
+          port_range_min: 22
+          port_range_max: 22
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: udp
+          port_range_min: 500
+          port_range_max: 500
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: udp
+          port_range_min: 4500
+          port_range_max: 4500
+  port:
+    type: OS::Neutron::Port
+    properties:
+      network: {{ cloud_vpn_initiator_vpc_id }}
+      fixed_ips:
+        - ip_address: {{ cloud_vpn_initiator_private_ip }}
+          subnet_id: {{ cloud_vpn_initiator_subnet_id }}
+      security_groups:
+        - { get_resource: security_group }
+  floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: {{ cloud_vpn_initiator_openstack_external_network }}
+      port_id: { get_resource: port }
+  instance:
+    type: OS::Nova::Server
+    properties:
+      name: {{ cloud_vpn_name }}-initiator-instance
+      key_name: {{ cloud_vpn_initiator_key_name }}
+      image: {{ cloud_vpn_initiator_image_id }}
+      flavor: m1.small
+      networks:
+        - port: { get_resource: port }

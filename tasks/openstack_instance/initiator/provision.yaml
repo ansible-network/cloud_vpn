@@ -1,0 +1,32 @@
+---
+
+- block:
+    - os_networks_facts:
+        cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
+        name: "{{ cloud_vpn_initiator_vpc_id }}"
+
+    - set_fact:
+        cloud_vpn_initiator_subnet_id: "{{ openstack_networks[0]['subnets'][0] }}"
+
+    - template:
+        src: openstack_instance/initiator/provision_in_existing_vpc.j2
+        dest: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+  when: cloud_vpn_initiator_vpc_id is defined
+
+- template:
+    src: openstack_instance/initiator/provision.j2
+    dest: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+  when: cloud_vpn_initiator_vpc_id is not defined
+
+- os_stack:
+    cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
+    name: "{{ cloud_vpn_name }}-initiator-stack"
+    template: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+
+- os_server_facts:
+    cloud: rdo-cloud
+    server: "{{ cloud_vpn_name }}-initiator-instance"
+  register: out
+
+- set_fact:
+    cloud_vpn_initiator_ip: "{{ openstack_servers[0]['interface_ip'] }}"

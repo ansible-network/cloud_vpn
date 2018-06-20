@@ -1,0 +1,64 @@
+heat_template_version: 2015-04-30
+
+resources:
+  network:
+    type: OS::Neutron::Net
+    properties:
+      name: {{ cloud_vpn_name }}-responder-network
+  subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      name: {{ cloud_vpn_name }}-responder-subnet
+      network_id: { get_resource: network }
+      cidr: {{ cloud_vpn_responder_cidr }}
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+  security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: {{ cloud_vpn_name }}-responder-security-group
+      rules:
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: tcp
+          port_range_min: 22
+          port_range_max: 22
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: udp
+          port_range_min: 500
+          port_range_max: 500
+        - remote_ip_prefix: 0.0.0.0/0
+          protocol: udp
+          port_range_min: 4500
+          port_range_max: 4500
+  port:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: network }
+      fixed_ips:
+        - ip_address: {{ cloud_vpn_responder_private_ip }}
+          subnet_id: { get_resource: subnet }
+      security_groups:
+        - { get_resource: security_group }
+  floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: {{ cloud_vpn_responder_openstack_external_network}}
+      port_id: { get_resource: port }
+  router:
+    type: OS::Neutron::Router
+    properties:
+      name: {{ cloud_vpn_name }}-responder-router
+      external_gateway_info: { network: {{ cloud_vpn_responder_openstack_external_network }} }
+  routerinterface:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router }
+      subnet: { get_resource: subnet }
+  instance:
+    type: OS::Nova::Server
+    properties:
+      name: {{ cloud_vpn_name }}-responder-instance
+      key_name: {{ cloud_vpn_responder_key_name }}
+      image: {{ cloud_vpn_responder_image_id }}
+      flavor: m1.small
+      networks:
+        - port: { get_resource: port }
