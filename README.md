@@ -98,15 +98,15 @@ Example playbook for VPN between a dynamically provisioned AWS CSR VM and AWS VP
   vars:
     cloud_vpn_psk: mypsksecret
     cloud_vpn_responder_type: aws_vpn
-    cloud_vpn_responder_key_name: aws
+    cloud_vpn_initiator_key_name: aws
     cloud_vpn_initiator_type: aws_ios
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_outside_interface: GigabitEthernet1
     cloud_vpn_initiator_user: ec2-user
     cloud_vpn_initiator_ssh_private_key_file: /home/ricky/.ssh/aws.pem
+    cloud_vpn_initiator_image_id: ami-e7704f82
     cloud_vpn_aws_region: us-east-2
-    cloud_vpn_aws_ios_image_id: ami-e7704f82
     cloud_vpn_aws_access_key: myaswaccesskey
     cloud_vpn_aws_secret_key: myawssecretkey
 
