@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: {{ cloud_vpn_initiator_vpc_cidr }}
+      Tags:
+        - Key: Name
+          Value: {{ cloud_vpn_name }}-initiator-vpc
+  subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: vpc
+      CidrBlock: {{ cloud_vpn_initiator_cidr }}
+  routetable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: vpc
+      Tags:
+        - Key: Name
+          Value: {{ cloud_vpn_name }}-initiator-routetable
+  route:
+    Type: AWS::EC2::Route
+    DependsOn: internetgw
+    Properties:
+      RouteTableId:
+        Ref: routetable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: internetgw
+  subnetroutetableassociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: routetable
+      SubnetId:
+        Ref: subnet
+  internetgw:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: {{ cloud_vpn_name }}-initiator-internetgw
+  vpcgwattachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId:
+        Ref: internetgw
+      VpcId:
+        Ref: vpc
+  securitygroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: {{ cloud_vpn_name }}-initiator-securitygroup
+      VpcId:
+        Ref: vpc
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: udp
+          FromPort: 500
+          ToPort: 500
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: udp
+          FromPort: 4500
+          ToPort: 4500
+          CidrIp: 0.0.0.0/0
+  instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: {{ cloud_vpn_initiator_image_id }}
+      KeyName: {{ cloud_vpn_initiator_key_name }}
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "true"
+          PrivateIpAddress: {{ cloud_vpn_initiator_private_ip }}
+          DeviceIndex: "0"
+          GroupSet:
+            - Ref: securitygroup
+          SubnetId:
+            Ref: subnet
+      Tags:
+        - Key: Name
+          Value: {{ cloud_vpn_name }}-initiator-instance
+    DependsOn: vpcgwattachment
