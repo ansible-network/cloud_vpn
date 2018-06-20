@@ -72,7 +72,7 @@ Resources:
   instance:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t2.micro
+      InstanceType: {{ cloud_vpn_initiator_instance_size }}
       ImageId: {{ cloud_vpn_initiator_image_id }}
       KeyName: {{ cloud_vpn_initiator_key_name }}
       NetworkInterfaces:
