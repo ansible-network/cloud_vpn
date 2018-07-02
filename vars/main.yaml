@@ -4,7 +4,7 @@ peer_type_to_config:
   aws_vyos: vyos
   openstack_vyos: vyos
   vyos: vyos
-  aws_ios: ios
-  openstack_ios: ios
-  ios: ios
+  aws_csr: csr
+  openstack_csr: csr
+  csr: csr
   aws_vpn: aws_vpn

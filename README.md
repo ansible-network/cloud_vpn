@@ -78,7 +78,7 @@ Example playbook for VPN between an on-premise CSR device and AWS VPN
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_type: ios
+    cloud_vpn_initiator_type: csr
     cloud_vpn_initiator_ip: 18.191.154.71
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_mgmt_ip: 18.191.154.71
@@ -108,7 +108,7 @@ Example playbook for VPN between a dynamically provisioned AWS CSR VM and AWS VP
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
     cloud_vpn_initiator_key_name: aws
-    cloud_vpn_initiator_type: aws_ios
+    cloud_vpn_initiator_type: aws_csr
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_outside_interface: GigabitEthernet1

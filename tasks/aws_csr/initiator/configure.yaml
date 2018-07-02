@@ -14,5 +14,5 @@
     seconds: "{{ cloud_vpn_pause_before_config_seconds }}"
 
 - ios_config:
-    src: "ios/initiator/{{ peer_type_to_config[cloud_vpn_responder_type] }}/configure.j2"
+    src: "csr/initiator/{{ peer_type_to_config[cloud_vpn_responder_type] }}/configure.j2"
   delegate_to: initiator
