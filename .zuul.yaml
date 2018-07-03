@@ -1,7 +1,7 @@
 - project:
     check:
       jobs:
-        - noop
+        - linters
     gate:
       jobs:
         - noop
