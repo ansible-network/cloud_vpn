@@ -1,0 +1,64 @@
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    cloud_vpn_responder_type: aws_vpn
+    cloud_vpn_responder_aws_region: us-east-2
+    cloud_vpn_initiator_type: aws_vyos
+    cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
+    cloud_vpn_initiator_cidr: 192.168.0.0/24
+    cloud_vpn_initiator_outside_interface: eth0
+    cloud_vpn_initiator_private_ip: 192.168.0.145
+    cloud_vpn_initiator_user: vyos
+    cloud_vpn_initiator_key_name: test_aws_vyos_to_aws_vpn
+    cloud_vpn_initiator_image_id: ami-07391762
+    cloud_vpn_initiator_aws_region: us-east-2
+    ansible_ssh_private_key_file: /tmp/test_aws_vyos_to_aws_vpn
+
+  tasks:
+    - ec2_key:
+        name: test_aws_vyos_to_aws_vpn
+        region: "{{ cloud_vpn_initiator_aws_region }}"
+        state: absent
+
+    - file:
+        path: /tmp/test_aws_vyos_to_aws_vpn
+        state: absent
+
+    - ec2_key:
+        name: test_aws_vyos_to_aws_vpn
+        region: "{{ cloud_vpn_initiator_aws_region }}"
+      register: out
+      no_log: True
+
+    - copy:
+        dest: /tmp/test_aws_vyos_to_aws_vpn
+        content: "{{ out.key.private_key }}"
+        mode: 0400
+
+    - include_role:
+        name: cloud-vpn
+
+    - vyos_command:
+        commands:
+          - ping 169.254.56.25 count 1
+      register: out
+      failed_when: "'100% packet loss' in out.stdout[0]"
+      delegate_to: initiator
+
+    - vyos_command:
+        commands:
+          - ping 169.254.56.29 count 1
+      register: out
+      failed_when: "'100% packet loss' in out.stdout[0]"
+      delegate_to: initiator
+
+    - file:
+        path: /tmp/test_aws_vyos_to_aws_vpn
+        state: absent
+
+    - ec2_key:
+        name: test_aws_vyos_to_aws_vpn
+        region: "{{ cloud_vpn_initiator_aws_region }}"
+        state: absent
