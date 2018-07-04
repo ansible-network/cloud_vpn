@@ -70,3 +70,24 @@
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
             state: absent
+
+        - cloudformation:
+            stack_name: cvpn-responder-configure-stack
+            aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
+            region: "{{ cloud_vpn_responder_aws_region }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: cvpn-responder-provision-stack
+            aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
+            region: "{{ cloud_vpn_responder_aws_region }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: cvpn-initiator-stack
+            aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
+            region: "{{ cloud_vpn_initiator_aws_region }}"
+            state: absent
