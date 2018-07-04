@@ -1,2 +1,3 @@
 tests/*.retry
 tests/output/
+tests/secrets.yaml
