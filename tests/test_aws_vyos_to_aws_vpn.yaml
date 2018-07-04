@@ -19,6 +19,8 @@
   tasks:
     - ec2_key:
         name: test_aws_vyos_to_aws_vpn
+        aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+        aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
         region: "{{ cloud_vpn_initiator_aws_region }}"
         state: absent
 
@@ -28,6 +30,8 @@
 
     - ec2_key:
         name: test_aws_vyos_to_aws_vpn
+        aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+        aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
         region: "{{ cloud_vpn_initiator_aws_region }}"
       register: out
       no_log: True
@@ -60,5 +64,7 @@
 
     - ec2_key:
         name: test_aws_vyos_to_aws_vpn
+        aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+        aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
         region: "{{ cloud_vpn_initiator_aws_region }}"
         state: absent
