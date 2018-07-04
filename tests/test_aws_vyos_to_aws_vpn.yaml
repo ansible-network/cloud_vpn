@@ -59,7 +59,7 @@
           register: out
           failed_when: "'100% packet loss' in out.stdout[0]"
           delegate_to: initiator
-    - always:
+      always:
         - file:
             path: /tmp/test_aws_vyos_to_aws_vpn
             state: absent
