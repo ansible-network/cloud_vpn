@@ -13,10 +13,10 @@
     cloud_vpn_initiator_outside_interface: eth0
     cloud_vpn_initiator_private_ip: 192.168.0.145
     cloud_vpn_initiator_user: vyos
-    cloud_vpn_initiator_key_name: test_aws_vyos_to_aws_vpn
+    cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-key }}"
     cloud_vpn_initiator_image_id: ami-07391762
     cloud_vpn_initiator_aws_region: us-east-2
-    ansible_ssh_private_key_file: /tmp/test_aws_vyos_to_aws_vpn
+    ansible_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
 
   tasks:
     - block:
@@ -28,7 +28,7 @@
             state: absent
 
         - file:
-            path: "/tmp/{{ cloud_vpn_name }}.key"
+            path: "{{ ansible_ssh_private_key_file }}"
             state: absent
 
         - ec2_key:
@@ -40,7 +40,7 @@
           no_log: True
 
         - copy:
-            dest: "/tmp/{{ cloud_vpn_name }}.key"
+            dest: "{{ ansible_ssh_private_key_file }}"
             content: "{{ out.key.private_key }}"
             mode: 0400
 
@@ -62,7 +62,7 @@
           delegate_to: initiator
       always:
         - file:
-            path: "/tmp/{{ cloud_vpn_name }}.key"
+            path: "{{ ansible_ssh_private_key_file }}"
             state: absent
 
         - ec2_key:
