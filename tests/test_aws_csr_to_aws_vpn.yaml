@@ -4,6 +4,7 @@
 
   vars:
     cloud_vpn_psk: mypsksecret
+    cloud_vpn_name: test-aws-csr-to-aws-vpn
     cloud_vpn_responder_type: aws_vpn
     cloud_vpn_responder_aws_region: us-east-2
     cloud_vpn_initiator_type: aws_csr
@@ -19,18 +20,18 @@
   tasks:
     - block:
         - ec2_key:
-            name: test_aws_csr_to_aws_vpn
+            name: "{{ cloud_vpn_name }}-key"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
             state: absent
 
         - file:
-            path: /tmp/test_aws_csr_to_aws_vpn
+            path: "/tmp/{{ cloud_vpn_name }}.key"
             state: absent
 
         - ec2_key:
-            name: test_aws_csr_to_aws_vpn
+            name: "{{ cloud_vpn_name }}-key"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
@@ -38,23 +39,21 @@
           no_log: True
 
         - copy:
-            dest: /tmp/test_aws_csr_to_aws_vpn
+            dest: "/tmp/{{ cloud_vpn_name }}.key"
             content: "{{ out.key.private_key }}"
             mode: 0400
 
         - include_role:
             name: cloud-vpn
-          vars:
-            cloud_vpn_name: test_aws_csr_to_aws_vpn
 
-        - vyos_command:
+        - ios_command:
             commands:
             - ping 169.254.56.25 count 1
           register: out
           failed_when: "'100% packet loss' in out.stdout[0]"
           delegate_to: initiator
 
-        - vyos_command:
+        - ios_command:
             commands:
             - ping 169.254.56.29 count 1
           register: out
@@ -62,32 +61,32 @@
           delegate_to: initiator
       always:
         - file:
-            path: /tmp/test_aws_csr_to_aws_vpn
+            path: "/tmp/{{ cloud_vpn_name }}.key"
             state: absent
 
         - ec2_key:
-            name: test_aws_csr_to_aws_vpn
+            name: "{{ cloud_vpn_name }}-key"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
             state: absent
 
         - cloudformation:
-            stack_name: test_aws_csr_to_aws_vpn-responder-configure-stack
+            stack_name: "{{ cloud_vpn_name }}-responder-configure-stack"
             aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
             region: "{{ cloud_vpn_responder_aws_region }}"
             state: absent
 
         - cloudformation:
-            stack_name: test_aws_csr_to_aws_vpn-responder-provision-stack
+            stack_name: "{{ cloud_vpn_name }}-responder-provision-stack"
             aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
             region: "{{ cloud_vpn_responder_aws_region }}"
             state: absent
 
         - cloudformation:
-            stack_name: test_aws_csr_to_aws_vpn-initiator-stack
+            stack_name: "{{ cloud_vpn_name }}-initiator-stack"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
