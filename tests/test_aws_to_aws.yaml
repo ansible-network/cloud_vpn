@@ -1,5 +1,6 @@
 ---
 
 - import_playbook: test_aws_vyos_to_aws_vpn.yaml
+- import_playbook: test_aws_vyos_to_aws_vyos.yaml
 - import_playbook: test_aws_csr_to_aws_vpn.yaml
 - import_playbook: test_aws_csr_to_aws_vyos.yaml
