@@ -11,6 +11,7 @@
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_outside_interface: GigabitEthernet1
+    cloud_vpn_initiator_private_ip: 192.168.0.145
     cloud_vpn_initiator_user: ec2-user
     cloud_vpn_initiator_key_name: test_aws_csr_to_aws_vpn
     cloud_vpn_initiator_image_id: ami-e7704f82
