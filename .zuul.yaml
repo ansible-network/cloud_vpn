@@ -1,9 +1,0 @@
-- project:
-    check:
-      jobs:
-        - linters
-        - cloud-vpn-aws-vyos-to-aws-vpn
-    gate:
-      jobs:
-        - linters
-        - cloud-vpn-aws-vyos-to-aws-vpn
