@@ -28,8 +28,8 @@
   tasks:
     - include_vars: "{{ item }}"
       with_first_found:
-        - "{{ playbook_dir }}"/test_aws_csr_to_aws_vyos_secrets.yaml
-        - "{{ playbook_dir }}"/secrets.yaml
+        - "{{ playbook_dir }}/test_aws_csr_to_aws_vyos_secrets.yaml"
+        - "{{ playbook_dir }}/secrets.yaml"
         - /tmp/test_aws_csr_to_aws_vyos_secrets.yaml
         - /tmp/secrets.yaml
 
