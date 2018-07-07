@@ -7,7 +7,7 @@
 
   vars:
     cloud_vpn_psk: mypsksecret
-    cloud_vpn_name: test2
+    cloud_vpn_name: test
     cloud_vpn_responder_type: aws_vyos
     cloud_vpn_responder_aws_region: us-east-2
     cloud_vpn_responder_vpc_cidr: 10.0.0.0/16
@@ -76,14 +76,14 @@
 
         - vyos_command:
             commands:
-            - ping 169.254.56.25 count 1
+            - ping 169.254.56.25 repeat 10
           register: out
           failed_when: "'Sucess rate is 0 percent' in out.stdout_lines[-1]"
           delegate_to: responder
 
         - vyos_command:
             commands:
-            - ping 192.168.0.145 count 1
+            - ping 192.168.0.145 repeat 10
           register: out
           failed_when: "'Sucess rate is 0 percent' in out.stdout_lines[-1]"
           delegate_to: responder

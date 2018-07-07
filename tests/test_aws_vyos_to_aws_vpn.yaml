@@ -7,7 +7,7 @@
 
   vars:
     cloud_vpn_psk: mypsksecret
-    cloud_vpn_name: test3
+    cloud_vpn_name: test
     cloud_vpn_responder_type: aws_vpn
     cloud_vpn_responder_aws_region: us-east-2
     cloud_vpn_initiator_type: aws_vyos
