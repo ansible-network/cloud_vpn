@@ -88,6 +88,20 @@
           register: out
           failed_when: "'100% packet loss' in out.stdout_lines[-1]"
           delegate_to: initiator
+
+        - vyos_command:
+            commands:
+            - ping 169.254.56.26 count 10
+          register: out
+          failed_when: "'100% packet loss' in out.stdout_lines[-1]"
+          delegate_to: responder
+
+        - vyos_command:
+            commands:
+            - ping 192.168.0.145 count 10
+          register: out
+          failed_when: "'100% packet loss' in out.stdout_lines[-1]"
+          delegate_to: initiator
       always:
         - file:
             path: "{{ ansible_ssh_private_key_file }}"
