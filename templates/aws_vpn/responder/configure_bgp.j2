@@ -26,6 +26,7 @@ Resources:
     Type: AWS::EC2::VPNConnection
     Properties:
       Type: ipsec.1
+      StaticRoutesOnly: false
       CustomerGatewayId:
         Ref: customergw
       VpnGatewayId:
