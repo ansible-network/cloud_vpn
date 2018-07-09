@@ -7,7 +7,7 @@
 
   vars:
     cloud_vpn_psk: mypsksecret
-    cloud_vpn_name: test-aws-csr-to-aws-vpn
+    cloud_vpn_name: test-aws-csr-to-aws-vpn-bgp
     cloud_vpn_routing_type: bgp
     cloud_vpn_responder_type: aws_vpn
     cloud_vpn_responder_aws_region: us-east-2
