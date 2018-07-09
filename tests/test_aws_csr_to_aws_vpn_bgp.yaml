@@ -1,0 +1,122 @@
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - "{{ playbook_dir }}/secrets.yaml"
+
+  vars:
+    cloud_vpn_psk: mypsksecret
+    cloud_vpn_name: test-aws-csr-to-aws-vpn
+    cloud_vpn_routing_type: bgp
+    cloud_vpn_responder_type: aws_vpn
+    cloud_vpn_responder_aws_region: us-east-2
+    cloud_vpn_initiator_type: aws_csr
+    cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
+    cloud_vpn_initiator_cidr: 192.168.0.0/24
+    cloud_vpn_initiator_outside_interface: GigabitEthernet1
+    cloud_vpn_initiator_private_ip: 192.168.0.145
+    cloud_vpn_initiator_user: ec2-user
+    cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-key"
+    cloud_vpn_initiator_image_id: ami-e7704f82
+    cloud_vpn_initiator_aws_region: us-east-2
+    ansible_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
+
+  tasks:
+    - block:
+        - ec2_key:
+            name: "{{ cloud_vpn_name }}-key"
+            aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
+            region: "{{ cloud_vpn_initiator_aws_region }}"
+            state: absent
+
+        - file:
+            path: "{{ ansible_ssh_private_key_file }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: "{{ cloud_vpn_name }}-responder-configure-stack"
+            aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
+            region: "{{ cloud_vpn_responder_aws_region }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: "{{ cloud_vpn_name }}-responder-provision-stack"
+            aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
+            region: "{{ cloud_vpn_responder_aws_region }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: "{{ cloud_vpn_name }}-initiator-stack"
+            aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
+            region: "{{ cloud_vpn_initiator_aws_region }}"
+            state: absent
+
+        - ec2_key:
+            name: "{{ cloud_vpn_name }}-key"
+            aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
+            region: "{{ cloud_vpn_initiator_aws_region }}"
+          register: out
+          no_log: True
+
+        - copy:
+            dest: "{{ ansible_ssh_private_key_file }}"
+            content: "{{ out.key.private_key }}"
+            mode: 0400
+
+        - include_role:
+            name: cloud-vpn
+
+        - pause:
+            seconds: 10
+
+        - ios_command:
+            commands:
+            - ping 169.254.56.25 repeat 10
+          register: out
+          failed_when: "'Sucess rate is 0 percent' in out.stdout_lines[-1]"
+          delegate_to: initiator
+
+        - ios_command:
+            commands:
+            - ping 169.254.56.29 repeat 10
+          register: out
+          failed_when: "'Sucess rate is 0 percent' in out.stdout_lines[-1]"
+          delegate_to: initiator
+      always:
+        - file:
+            path: "{{ ansible_ssh_private_key_file }}"
+            state: absent
+
+        - ec2_key:
+            name: "{{ cloud_vpn_name }}-key"
+            aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
+            region: "{{ cloud_vpn_initiator_aws_region }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: "{{ cloud_vpn_name }}-responder-configure-stack"
+            aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
+            region: "{{ cloud_vpn_responder_aws_region }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: "{{ cloud_vpn_name }}-responder-provision-stack"
+            aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
+            region: "{{ cloud_vpn_responder_aws_region }}"
+            state: absent
+
+        - cloudformation:
+            stack_name: "{{ cloud_vpn_name }}-initiator-stack"
+            aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
+            aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
+            region: "{{ cloud_vpn_initiator_aws_region }}"
+            state: absent
