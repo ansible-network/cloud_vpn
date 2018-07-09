@@ -11,6 +11,7 @@ cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
 cloud_vpn_initiator_cidr: 192.168.0.0/24
 cloud_vpn_initiator_private_ip: 192.168.0.10
 cloud_vpn_initiator_tunnel_a_ip: 169.254.56.26
+cloud_vpn_initiator_bgp_asn: 65000
 
 cloud_vpn_responder_vpc_cidr: 10.0.0.0/16
 cloud_vpn_responder_cidr: 10.0.0.0/24
