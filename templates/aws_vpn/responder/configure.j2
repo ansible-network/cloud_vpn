@@ -4,7 +4,7 @@ Resources:
     Type: AWS::EC2::CustomerGateway
     Properties:
       Type: ipsec.1
-      BgpAsn: '65000'
+      BgpAsn: {{ cloud_vpn_initiator_bgp_asn }}
       IpAddress: {{ cloud_vpn_initiator_ip }}
       Tags:
         - Key: Name
