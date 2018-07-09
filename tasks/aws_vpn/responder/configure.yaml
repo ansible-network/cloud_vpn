@@ -1,2 +1,2 @@
 ---
-- include_tasks: "configure_{{ cloud_vpn_initiator_routing_type }}.yaml"
+- include_tasks: "configure_{{ cloud_vpn_routing_type }}.yaml"
