@@ -39,12 +39,6 @@ Resources:
       Tags:
         - Key: Name
           Value: {{ cloud_vpn_name }}-responder-vpn
-  vpnconnectionroute:
-    Type: AWS::EC2::VPNConnectionRoute
-    Properties:
-      DestinationCidrBlock: {{ cloud_vpn_initiator_cidr }}
-      VpnConnectionId:
-        Ref: vpn
   vpngwroutepropagation:
     Type: AWS::EC2::VPNGatewayRoutePropagation
     DependsOn: vpngwattachment
