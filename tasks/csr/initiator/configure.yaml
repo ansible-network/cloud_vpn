@@ -1,11 +1,2 @@
 ---
-- add_host:
-    name: initiator
-    ansible_host: "{{ cloud_vpn_initiator_ip }}"
-    ansible_user: "{{ cloud_vpn_initiator_user }}"
-    ansible_connection: network_cli
-    ansible_network_os: ios
-
-- ios_config:
-    src: "csr/initiator/{{ peer_type_to_config[cloud_vpn_responder_type] }}/configure.j2"
-  delegate_to: initiator
+- include_tasks: "configure_{{ cloud_vpn_routing_type }}.yaml"

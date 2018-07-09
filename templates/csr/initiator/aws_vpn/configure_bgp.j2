@@ -56,6 +56,20 @@ exit
 ip sla schedule 100  life forever start-time now
 track 100 ip sla 100 reachability
 
+router bgp {{ cloud_vpn_initiator_bgp_asn }}
+   neighbor {{ cloud_vpn_responder_tunnel_a_ip }} remote-as {{ cloud_vpn_responder_bgp_asn }}
+   neighbor {{ cloud_vpn_responder_tunnel_a_ip }} activate
+   neighbor {{ cloud_vpn_responder_tunnel_a_ip }} timers 10 30 30
+   address-family ipv4 unicast
+      neighbor {{ cloud_vpn_responder_tunnel_a_ip }} remote-as {{ cloud_vpn_responder_bgp_asn }}
+      neighbor {{ cloud_vpn_responder_tunnel_a_ip }} timers 10 30 30
+      neighbor {{ cloud_vpn_responder_tunnel_a_ip }} default-originate
+      neighbor {{ cloud_vpn_responder_tunnel_a_ip }} activate
+      neighbor {{ cloud_vpn_responder_tunnel_a_ip }} soft-reconfiguration inbound
+      network 0.0.0.0
+   exit
+exit
+
 crypto isakmp policy 201
   encryption aes 128
   authentication pre-share
@@ -113,3 +127,17 @@ ip sla 200
 exit
 ip sla schedule 200  life forever start-time now
 track 200 ip sla 200 reachability
+
+router bgp {{ cloud_vpn_initiator_bgp_asn }}
+   neighbor {{ cloud_vpn_responder_tunnel_b_ip }} remote-as {{ cloud_vpn_responder_bgp_asn }}
+   neighbor {{ cloud_vpn_responder_tunnel_b_ip }} activate
+   neighbor {{ cloud_vpn_responder_tunnel_b_ip }} timers 10 30 30
+   address-family ipv4 unicast
+      neighbor {{ cloud_vpn_responder_tunnel_b_ip }} remote-as {{ cloud_vpn_responder_bgp_asn }}
+      neighbor {{ cloud_vpn_responder_tunnel_b_ip }} timers 10 30 30
+      neighbor {{ cloud_vpn_responder_tunnel_b_ip }} default-originate
+      neighbor {{ cloud_vpn_responder_tunnel_b_ip }} activate
+      neighbor {{ cloud_vpn_responder_tunnel_b_ip }} soft-reconfiguration inbound
+      network 0.0.0.0
+   exit
+exit
