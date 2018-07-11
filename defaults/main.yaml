@@ -21,3 +21,4 @@ cloud_vpn_responder_private_ip: 10.0.0.10
 cloud_vpn_responder_ip: "{{ '{{' }} cloud_vpn_responder_ip {{ '}}' }}"
 cloud_vpn_responder_failover_ip: "{{ '{{' }} cloud_vpn_responder_failover_ip {{ '}}' }}"
 cloud_vpn_responder_tunnel_a_ip: 169.254.56.25
+cloud_vpn_responder_bgp_asn: 65001
