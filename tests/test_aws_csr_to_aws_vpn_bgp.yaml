@@ -10,7 +10,6 @@
     cloud_vpn_name: test-aws-csr-to-aws-vpn-bgp
     cloud_vpn_routing_type: bgp
     cloud_vpn_responder_type: aws_vpn
-    cloud_vpn_responder_aws_region: us-east-2
     cloud_vpn_initiator_type: aws_csr
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
@@ -18,8 +17,6 @@
     cloud_vpn_initiator_private_ip: 192.168.0.145
     cloud_vpn_initiator_user: ec2-user
     cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-key"
-    cloud_vpn_initiator_image_id: ami-e7704f82
-    cloud_vpn_initiator_aws_region: us-east-2
     ansible_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
 
   tasks:
