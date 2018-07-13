@@ -7,7 +7,7 @@ It only supports static routing (for now).
 Example playbook for VPN between an on-premise VyOS device and AWS VPN
 ----------------------------------------------------------------------
 
-```
+```yaml
 - hosts: localhost
   connection: local
   gather_facts: no
@@ -35,7 +35,7 @@ Example playbook for VPN between an on-premise VyOS device and AWS VPN
 Example playbook for VPN between a dynamically provisioned AWS VyOS VM and AWS VPN
 ----------------------------------------------------------------------------------
 
-```
+```yaml
 - hosts: localhost
   connection: local
   gather_facts: no
@@ -67,7 +67,7 @@ Example playbook for VPN between a dynamically provisioned AWS VyOS VM and AWS V
 Example playbook for VPN between an on-premise CSR device and AWS VPN
 ---------------------------------------------------------------------
 
-```
+```yaml
 - hosts: localhost
   connection: local
   gather_facts: no
@@ -96,7 +96,7 @@ Example playbook for VPN between an on-premise CSR device and AWS VPN
 Example playbook for VPN between a dynamically provisioned AWS CSR VM and AWS VPN
 ---------------------------------------------------------------------------------
 
-```
+```yaml
 - hosts: localhost
   connection: local
   gather_facts: no
