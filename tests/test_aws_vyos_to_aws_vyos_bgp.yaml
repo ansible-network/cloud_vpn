@@ -25,7 +25,7 @@
     cloud_vpn_initiator_private_ip: 192.168.0.145
     cloud_vpn_initiator_user: vyos
     cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-key"
-    cloud_vpn_responder_image_id: ami-92e86ae8
+    cloud_vpn_initiator_image_id: ami-92e86ae8
     cloud_vpn_initiator_aws_region: us-east-1
     ansible_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
 
