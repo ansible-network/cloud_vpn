@@ -32,7 +32,7 @@
             name: "{{ cloud_vpn_name }}-key"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
-            security_token: "{{ cloud_vpn_initiator_security_token | default(omit) }}"
+            security_token: "{{ cloud_vpn_initiator_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
             state: absent
 
@@ -44,7 +44,7 @@
             stack_name: "{{ cloud_vpn_name }}-responder-stack"
             aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
-            security_token: "{{ cloud_vpn_responder_security_token | default(omit) }}"
+            security_token: "{{ cloud_vpn_responder_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_responder_aws_region }}"
             state: absent
 
@@ -52,7 +52,7 @@
             stack_name: "{{ cloud_vpn_name }}-initiator-stack"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
-            security_token: "{{ cloud_vpn_initiator_security_token | default(omit) }}"
+            security_token: "{{ cloud_vpn_initiator_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
             state: absent
 
@@ -60,7 +60,7 @@
             name: "{{ cloud_vpn_name }}-key"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
-            security_token: "{{ cloud_vpn_initiator_security_token | default(omit) }}"
+            security_token: "{{ cloud_vpn_initiator_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
           register: out
           no_log: True
@@ -112,7 +112,7 @@
             name: "{{ cloud_vpn_name }}-key"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
-            security_token: "{{ cloud_vpn_initiator_security_token | default(omit) }}"
+            security_token: "{{ cloud_vpn_initiator_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
             state: absent
 
@@ -120,7 +120,7 @@
             stack_name: "{{ cloud_vpn_name }}-responder-stack"
             aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
-            security_token: "{{ cloud_vpn_responder_security_token | default(omit) }}"
+            security_token: "{{ cloud_vpn_responder_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_responder_aws_region }}"
             state: absent
 
@@ -128,6 +128,6 @@
             stack_name: "{{ cloud_vpn_name }}-initiator-stack"
             aws_access_key: "{{ cloud_vpn_initiator_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_initiator_aws_secret_key }}"
-            security_token: "{{ cloud_vpn_initiator_security_token | default(omit) }}"
+            security_token: "{{ cloud_vpn_initiator_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
             state: absent
