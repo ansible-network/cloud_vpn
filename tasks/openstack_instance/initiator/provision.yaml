@@ -24,7 +24,7 @@
     template: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
 
 - os_server_facts:
-    cloud: rdo-cloud
+    cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
     server: "{{ cloud_vpn_name }}-initiator-instance"
   register: out
 

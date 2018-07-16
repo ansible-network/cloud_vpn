@@ -24,7 +24,7 @@
     template: "/tmp/{{ cloud_vpn_name }}-responder-provision.template"
 
 - os_server_facts:
-    cloud: rdo-cloud
+    cloud: "{{ cloud_vpn_responder_openstack_cloud }}"
     server: "{{ cloud_vpn_name }}-responder-instance"
   register: out
 
