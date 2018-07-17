@@ -2,7 +2,7 @@ cloud-vpn
 =========
 
 This role allows to create VPN IPSEC site-to-site tunnels between cloud providers and network devices.
-It only supports static routing (for now).
+It supports BGP and static routing.
 
 Example playbook for VPN between an on-premise VyOS device and AWS VPN
 ----------------------------------------------------------------------
