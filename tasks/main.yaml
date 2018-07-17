@@ -7,3 +7,9 @@
 - include_tasks: "{{ cloud_vpn_responder_type }}/responder/configure.yaml"
 
 - include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/configure.yaml"
+
+- debug:
+    msg: "Initiator has IP {{ cloud_vpn_initiator_ip }} and user {{ cloud_vpn_initiator_user }}"
+
+- debug:
+    msg: "Responder has IP {{ cloud_vpn_responder_ip }} and user {{ cloud_vpn_responder_user }}"
