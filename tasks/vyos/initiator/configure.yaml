@@ -9,6 +9,7 @@
 - wait_for:
     host: initiator
     port: 22
+  delegate_to: initiator
 
 - pause:
     seconds: "{{ cloud_vpn_pause_before_config_seconds }}"
