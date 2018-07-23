@@ -1,0 +1,21 @@
+---
+- azure_rm_resourcegroup:
+    name: "{{ cloud_vpn_name }}-initiator-resource-group"
+    location: "{{ cloud_vpn_initiator_azure_region }}"
+    subscription_id: "{{ cloud_vpn_initiator_azure_subscription_id }}"
+    tenant: "{{ cloud_vpn_initiator_azure_tenant }}"
+    client_id: "{{ cloud_vpn_initiator_azure_client_id }}"
+    secret: "{{ cloud_vpn_initiator_azure_secret }}"
+
+- azure_rm_deployment:
+    resource_group: "{{ cloud_vpn_name }}-initiator-resource-group"
+    deployment_name: "{{ cloud_vpn_name }}-initiator-template"
+    template: "{{ lookup('template', 'templates/azure_instance/initiator/provision.j2') }}"
+    subscription_id: "{{ cloud_vpn_initiator_azure_subscription_id }}"
+    tenant: "{{ cloud_vpn_initiator_azure_tenant }}"
+    client_id: "{{ cloud_vpn_initiator_azure_client_id }}"
+    secret: "{{ cloud_vpn_initiator_azure_secret }}"
+  register: out
+
+- set_fact:
+    cloud_vpn_initiator_ip: "{{ out['deployment']['instances'][0]['ips'][0]['public_ip'] }}"

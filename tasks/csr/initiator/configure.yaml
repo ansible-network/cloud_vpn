@@ -6,6 +6,13 @@
     ansible_connection: network_cli
     ansible_network_os: ios
 
+- wait_for:
+    host: "{{ cloud_vpn_initiator_ip }}"
+    port: 22
+
+- pause:
+    seconds: "{{ cloud_vpn_pause_before_config_seconds }}"
+
 - ios_config:
     src: "csr/initiator/{{ peer_type_to_config[cloud_vpn_responder_type] }}/configure_{{ cloud_vpn_routing_type }}.j2"
   delegate_to: initiator

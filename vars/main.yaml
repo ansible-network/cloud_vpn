@@ -6,5 +6,6 @@ peer_type_to_config:
   vyos: vyos
   aws_csr: csr
   openstack_csr: csr
+  azure_csr: csr
   csr: csr
   aws_vpn: aws_vpn

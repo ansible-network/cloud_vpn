@@ -1,0 +1,2 @@
+---
+- include_tasks: csr/initiator/configure.yaml
