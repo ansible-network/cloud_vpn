@@ -11,9 +11,6 @@
     }
   },
   "variables": {
-    "imagePublisher": "cisco",
-    "imageOffer": "cisco-csr-1000v",
-    "imageSKU": "csr-azure-byol",
     "storageAccountName": "[concat('vhds', uniqueString(resourceGroup().id))]",
     "publicIPAddressName": "{{ cloud_vpn_name }}-initiator-public-ip",
     "dnsPrefix": "[concat('{{ cloud_vpn_name }}-initiator-', uniqueString(resourceGroup().id))]",
@@ -162,9 +159,9 @@
       "name": "[variables('vmName')]",
       "location": "[parameters('location')]",
       "plan": {
-        "name": "csr-azure-byol",
-        "publisher": "cisco",
-        "product": "cisco-csr-1000v"
+        "name": "{{ cloud_vpn_initiator_azure_image_sku }}",
+        "publisher": "{{ cloud_vpn_initiator_azure_image_publisher }}",
+        "product": "{{ cloud_vpn_initiator_azure_image_offer }}"
       },
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
@@ -183,7 +180,7 @@
               "publicKeys": [
                 {
                   "path": "/home/azure-user/.ssh/authorized_keys",
-                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCd5MG9Jfa6FlJrHuGxC7Vz5JrYSuSGOBj/IXfL7LATTcTpvaKPUCJQnHYcmgCernrEbszf5qhk8b5ffNEYriDvvu8Hua4uSAiVGG4gH0gvZHWPNSINvwgySMKS+tabCeopOlhk/c1sduks7d7sZmees8ra4uYibcSBmodcgkfiBZAJrqXMT94IVnDLE/RWF1w3iazMEQTu5HIccLICF+sRQsR+V+GoPhqKfteOD6NE6mggwubwp3m1fQBvdsjyr/iDJNbA8nQKn9GIxWz9+gjs1H3E2GJ/b5+n0hoxQ0WdJHhC5xyHjge5rJS4nkcC6GlLqV6jVVm2NQ9ZKcUsDd33",
+                  "keyData": "{{ lookup('pipe', 'ssh-keygen -y -f ' + cloud_vpn_initiator_ssh_private_key_file) }}",
                 }
               ]
             }
@@ -191,10 +188,10 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "[variables('imagePublisher')]",
-            "offer": "[variables('imageOffer')]",
-            "sku": "[variables('imageSKU')]",
-            "version": "latest"
+            "publisher": "['{{ cloud_vpn_initiator_azure_image_publisher }}']",
+            "offer": "['{{ cloud_vpn_initiator_azure_image_offer }}']",
+            "sku": "['{{ cloud_vpn_initiator_azure_image_sku }}']",
+            "version": "{{ cloud_vpn_initiator_azure_image_version }}"
           },
           "osDisk": {
             "name": "osdisk",

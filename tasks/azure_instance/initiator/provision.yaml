@@ -1,4 +1,16 @@
 ---
+- set_fact:
+    cloud_vpn_initiator_azure_image_publisher: "{{ cloud_vpn_initiator_image_id.split(':')[0] }}"
+
+- set_fact:
+    cloud_vpn_initiator_azure_image_offer: "{{ cloud_vpn_initiator_image_id.split(':')[1] }}"
+
+- set_fact:
+    cloud_vpn_initiator_azure_image_sku: "{{ cloud_vpn_initiator_image_id.split(':')[2] }}"
+
+- set_fact:
+    cloud_vpn_initiator_azure_image_version: "{{ cloud_vpn_initiator_image_id.split(':')[3] }}"
+
 - azure_rm_resourcegroup:
     name: "{{ cloud_vpn_name }}-initiator-resource-group"
     location: "{{ cloud_vpn_initiator_azure_region }}"
