@@ -1,7 +1,9 @@
 ---
 
-- include_tasks: create_vpn.yaml
+- name: Include create VPN tasks
+  include_tasks: create_vpn.yaml
   when: cloud_vpn_state == 'present'
 
-- include_tasks: delete_vpn.yaml
+- name: Include delete VPN tasks
+  include_tasks: delete_vpn.yaml
   when: cloud_vpn_state == 'absent'

@@ -1,6 +1,8 @@
 ---
 
-- set_fact:
+- name: Set CSR instance default if not defined
+  set_fact:
     cloud_vpn_initiator_instance_size: "{{ cloud_vpn_initiator_instance_size | default('c4.large') }}"
 
-- include_tasks: aws_instance/initiator/provision.yaml
+- name: Include AWS instance as initiator provision tasks
+  include_tasks: aws_instance/initiator/provision.yaml

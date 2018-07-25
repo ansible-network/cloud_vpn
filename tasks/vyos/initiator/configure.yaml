@@ -1,18 +1,22 @@
 ---
-- add_host:
+- name: Add initiator host
+  add_host:
     name: initiator
     ansible_host: "{{ cloud_vpn_initiator_ip }}"
     ansible_user: "{{ cloud_vpn_initiator_user }}"
     ansible_connection: network_cli
     ansible_network_os: vyos
 
-- wait_for:
+- name: Wait for SSH port to be reachable
+  wait_for:
     host: "{{ cloud_vpn_initiator_ip }}"
     port: 22
 
-- pause:
+- name: Pause for SSH daemon to settle and accept connections
+  pause:
     seconds: "{{ cloud_vpn_pause_before_config_seconds }}"
 
-- vyos_config:
+- name: Push configuration to VyOS device
+  vyos_config:
     src: "vyos/initiator/{{ peer_type_to_config[cloud_vpn_responder_type] }}/configure_{{ cloud_vpn_routing_type }}.j2"
   delegate_to: initiator

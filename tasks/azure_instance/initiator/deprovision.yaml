@@ -1,6 +1,7 @@
 ---
 
-- azure_rm_resourcegroup:
+- name: Delete resource group
+  azure_rm_resourcegroup:
     name: "{{ cloud_vpn_name }}-initiator-resource-group"
     location: "{{ cloud_vpn_initiator_azure_region }}"
     subscription_id: "{{ cloud_vpn_initiator_azure_subscription_id }}"
