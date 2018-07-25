@@ -1,4 +1,0 @@
----
-- template:
-    src: "two_step/{{ cloud_vpn_responder_type }}/responder/hostvars.j2"
-    dest: "{{ cloud_vpn_output_dir }}/inventory/host_vars/responder"
