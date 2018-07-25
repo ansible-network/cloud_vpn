@@ -1,0 +1,11 @@
+---
+
+- azure_rm_resourcegroup:
+    name: "{{ cloud_vpn_name }}-initiator-resource-group"
+    location: "{{ cloud_vpn_initiator_azure_region }}"
+    subscription_id: "{{ cloud_vpn_initiator_azure_subscription_id }}"
+    tenant: "{{ cloud_vpn_initiator_azure_tenant }}"
+    client_id: "{{ cloud_vpn_initiator_azure_client_id }}"
+    secret: "{{ cloud_vpn_initiator_azure_secret }}"
+    force: True
+    state: absent
