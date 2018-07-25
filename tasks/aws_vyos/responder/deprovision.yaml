@@ -1,3 +1,4 @@
 ---
 
-- include_tasks: aws_instance/responder/deprovision.yaml
+- name: Include AWS instance as responder deprovision tasks
+  include_tasks: aws_instance/responder/deprovision.yaml

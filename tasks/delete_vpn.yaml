@@ -1,5 +1,7 @@
 ---
 
-- include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/deprovision.yaml"
+- name: Include initiator deprovision tasks
+  include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/deprovision.yaml"
 
-- include_tasks: "{{ cloud_vpn_responder_type }}/responder/deprovision.yaml"
+- name: Include responder deprovision tasks
+  include_tasks: "{{ cloud_vpn_responder_type }}/responder/deprovision.yaml"

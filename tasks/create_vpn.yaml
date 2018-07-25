@@ -1,17 +1,23 @@
 ---
 
-- include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/provision.yaml"
+- name: Include initiator provision tasks
+  include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/provision.yaml"
 
-- include_tasks: "{{ cloud_vpn_responder_type }}/responder/provision.yaml"
+- name: Include responder provision tasks
+  include_tasks: "{{ cloud_vpn_responder_type }}/responder/provision.yaml"
 
-- include_tasks: "{{ cloud_vpn_responder_type }}/responder/configure.yaml"
+- name: Include responder configure tasks
+  include_tasks: "{{ cloud_vpn_responder_type }}/responder/configure.yaml"
 
-- include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/configure.yaml"
+- name: Include initiator configure tasks
+  include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/configure.yaml"
 
-- debug:
+- name: Show initiator IP and user
+  debug:
     msg: "Initiator has IP {{ cloud_vpn_initiator_ip }} and user {{ cloud_vpn_initiator_user }}"
   when: cloud_vpn_initiator_user is defined
 
-- debug:
+- name: Show responder IP and user
+  debug:
     msg: "Responder has IP {{ cloud_vpn_responder_ip }} and user {{ cloud_vpn_responder_user }}"
   when: cloud_vpn_responder_user is defined
