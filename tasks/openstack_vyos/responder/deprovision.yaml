@@ -1,0 +1,4 @@
+---
+
+- name: Include OpenStack instance as responder deprovision tasks
+  include_tasks: openstack_instance/responder/deprovision.yaml
