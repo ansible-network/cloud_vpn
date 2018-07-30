@@ -1,5 +1,4 @@
 ---
-cloud_vpn_output_dir: "{{ playbook_dir }}/output"
 cloud_vpn_name: cvpn
 cloud_vpn_state: present
 cloud_vpn_pause_before_config_seconds: 30
@@ -19,7 +18,5 @@ cloud_vpn_initiator_bgp_asn: 65000
 cloud_vpn_responder_vpc_cidr: 10.0.0.0/16
 cloud_vpn_responder_cidr: 10.0.0.0/24
 cloud_vpn_responder_private_ip: 10.0.0.10
-cloud_vpn_responder_ip: "{{ '{{' }} cloud_vpn_responder_ip {{ '}}' }}"
-cloud_vpn_responder_failover_ip: "{{ '{{' }} cloud_vpn_responder_failover_ip {{ '}}' }}"
 cloud_vpn_responder_tunnel_a_ip: 169.254.56.25
 cloud_vpn_responder_bgp_asn: 65001
