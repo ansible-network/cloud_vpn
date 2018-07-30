@@ -13,11 +13,11 @@ The functions included allow to:
 * Azure
 * OpenStack
 
-## Support VPN endpoints
+## Supported VPN endpoints
 
 * AWS VPN
 * VyOS
-* CSR
+* Cisco CSR
 
 ## Requirements
 
