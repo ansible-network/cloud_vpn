@@ -1,125 +1,44 @@
 cloud-vpn
 =========
 
-This role allows to create VPN IPSEC site-to-site tunnels between cloud providers and network devices.
-It supports BGP and static routing.
+This Ansible Network role provides functions to manage IPSEC VPN tunnels.
+The functions included allow to:
+* Configure IPSEC in multiple networking platforms and VPNaaS providers.
+* Provision networking appliances in public and private
+  cloud providers.
 
-Example playbook for VPN between an on-premise VyOS device and AWS VPN
-----------------------------------------------------------------------
+## Supported cloud providers
 
-```yaml
-- hosts: localhost
-  connection: local
-  gather_facts: no
+* AWS
+* Azure
+* OpenStack
 
-  vars:
-    cloud_vpn_psk: mypsksecret
-    cloud_vpn_responder_type: aws_vpn
-    cloud_vpn_responder_aws_access_key: myaswaccesskey
-    cloud_vpn_responder_aws_secret_key: myawssecretkey
-    cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_type: vyos
-    cloud_vpn_initiator_ip: 18.191.132.220
-    cloud_vpn_initiator_cidr: 192.168.0.0/24
-    cloud_vpn_initiator_mgmt_ip: 18.191.132.220
-    cloud_vpn_initiator_outside_interface: eth0
-    cloud_vpn_initiator_private_ip: 192.168.0.155
-    cloud_vpn_initiator_user: vyos
-    cloud_vpn_initiator_ssh_private_key_file: /home/ricky/.ssh/aws.pem
+## Support VPN endpoints
 
-  tasks:
-    - include_role:
-        name: cloud-vpn
-```
+* AWS VPN
+* VyOS
+* CSR
 
-Example playbook for VPN between a dynamically provisioned AWS VyOS VM and AWS VPN
-----------------------------------------------------------------------------------
+## Requirements
 
-```yaml
-- hosts: localhost
-  connection: local
-  gather_facts: no
+* Ansible 2.6 or later
+* [requirements.txt](requirements.txt) packages
 
-  vars:
-    cloud_vpn_psk: mypsksecret
-    cloud_vpn_responder_type: aws_vpn
-    cloud_vpn_responder_aws_access_key: myaswaccesskey
-    cloud_vpn_responder_aws_secret_key: myawssecretkey
-    cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_type: aws_vyos
-    cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
-    cloud_vpn_initiator_cidr: 192.168.0.0/24
-    cloud_vpn_initiator_outside_interface: eth0
-    cloud_vpn_initiator_private_ip: 192.168.0.145
-    cloud_vpn_initiator_user: vyos
-    cloud_vpn_initiator_ssh_private_key_file: /home/ricky/.ssh/aws.pem
-    cloud_vpn_initiator_key_name: aws
-    cloud_vpn_initiator_image_id: ami-07391762
-    cloud_vpn_initiator_aws_access_key: myaswaccesskey
-    cloud_vpn_initiator_aws_secret_key: myawssecretkey
-    cloud_vpn_initiator_aws_region: us-east-2
+## Functions
 
-  tasks:
-    - include_role:
-        name: cloud-vpn
-```
+This section provides a list of the available functions that are included
+in this role.
 
-Example playbook for VPN between an on-premise CSR device and AWS VPN
----------------------------------------------------------------------
+Please see the documentation link for each function for details on how to use
+the function in an Ansible playbook.
 
-```yaml
-- hosts: localhost
-  connection: local
-  gather_facts: no
+* create_vpn [[docs]](docs/create_vpn.md) [[source]](tasks/create_vpn.yaml)
+* delete_vpn [[docs]](docs/delete_vpn.md) [[source]](tasks/delete_vpn.yaml)
 
-  vars:
-    cloud_vpn_psk: mypsksecret
-    cloud_vpn_responder_type: aws_vpn
-    cloud_vpn_responder_aws_access_key: myaswaccesskey
-    cloud_vpn_responder_aws_secret_key: myawssecretkey
-    cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_type: csr
-    cloud_vpn_initiator_ip: 18.191.154.71
-    cloud_vpn_initiator_cidr: 192.168.0.0/24
-    cloud_vpn_initiator_mgmt_ip: 18.191.154.71
-    cloud_vpn_initiator_user: ec2-user
-    cloud_vpn_initiator_ssh_private_key_file: /home/ricky/.ssh/aws.pem
-    cloud_vpn_initiator_aws_access_key: myaswaccesskey
-    cloud_vpn_initiator_aws_secret_key: myawssecretkey
-    cloud_vpn_initiator_aws_region: us-east-2
+## License
 
-  tasks:
-    - include_role:
-        name: cloud-vpn
-```
+GPLv3
 
-Example playbook for VPN between a dynamically provisioned AWS CSR VM and AWS VPN
----------------------------------------------------------------------------------
+## Author information
 
-```yaml
-- hosts: localhost
-  connection: local
-  gather_facts: no
-
-  vars:
-    cloud_vpn_psk: mypsksecret
-    cloud_vpn_responder_type: aws_vpn
-    cloud_vpn_responder_aws_access_key: myaswaccesskey
-    cloud_vpn_responder_aws_secret_key: myawssecretkey
-    cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_key_name: aws
-    cloud_vpn_initiator_type: aws_csr
-    cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
-    cloud_vpn_initiator_cidr: 192.168.0.0/24
-    cloud_vpn_initiator_outside_interface: GigabitEthernet1
-    cloud_vpn_initiator_user: ec2-user
-    cloud_vpn_initiator_ssh_private_key_file: /home/ricky/.ssh/aws.pem
-    cloud_vpn_initiator_image_id: ami-e7704f82
-    cloud_vpn_initiator_aws_access_key: myaswaccesskey
-    cloud_vpn_initiator_aws_secret_key: myawssecretkey
-    cloud_vpn_initiator_aws_region: us-east-2
-
-  tasks:
-    - include_role:
-        name: cloud-vpn
-```
+Ricardo Carrillo Cruz (rcarrillocruz)
