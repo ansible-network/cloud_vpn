@@ -1,0 +1,3 @@
+---
+- name: Include RHEL as initiator configure routing tasks
+  include_tasks: "rhel/initiator/configure_routing.yaml"

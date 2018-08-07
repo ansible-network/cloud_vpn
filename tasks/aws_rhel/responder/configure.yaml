@@ -1,0 +1,4 @@
+---
+
+- name: Include RHEL as responder configure tasks
+  include_tasks: "rhel/responder/configure.yaml"

@@ -1,0 +1,4 @@
+---
+
+- name: Include AWS instance as initiator deprovision tasks
+  include_tasks: aws_instance/initiator/deprovision.yaml

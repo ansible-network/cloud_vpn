@@ -70,7 +70,7 @@
             mode: 0400
 
         - include_role:
-            name: cloud-vpn
+            name: cloud_vpn
 
         - pause:
             seconds: 10
