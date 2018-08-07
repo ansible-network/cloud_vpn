@@ -1,4 +1,0 @@
----
-
-- name: Include VyOS as responder configure tasks
-  include_tasks: "vyos/responder/configure.yaml"

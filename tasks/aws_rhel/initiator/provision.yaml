@@ -1,8 +1,0 @@
----
-
-- name: Set RHEL instance size default if undefined
-  set_fact:
-    cloud_vpn_initiator_instance_size: "{{ cloud_vpn_initiator_instance_size | default('t2.micro') }}"
-
-- name: Include AWS instance as initiator provision tasks
-  include_tasks: aws_instance/initiator/provision.yaml

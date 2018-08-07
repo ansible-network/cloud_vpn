@@ -1,3 +1,0 @@
----
-- name: Include VyOS as initiator configure tasks
-  include_tasks: "vyos/initiator/configure.yaml"

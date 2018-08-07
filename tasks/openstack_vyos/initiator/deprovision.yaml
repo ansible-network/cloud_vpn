@@ -1,4 +1,0 @@
----
-
-- name: Include OpenStack instance as initiator deprovision tasks
-  include_tasks: openstack_instance/initiator/deprovision.yaml

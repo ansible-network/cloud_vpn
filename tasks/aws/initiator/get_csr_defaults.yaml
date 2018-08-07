@@ -1,0 +1,5 @@
+---
+
+- name: Set initiator instance size default for CSR if not defined
+  set_fact:
+    cloud_vpn_initiator_instance_size: "{{ cloud_vpn_initiator_instance_size | default('c4.large') }}"
