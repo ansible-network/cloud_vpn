@@ -1,5 +1,0 @@
----
-- set_fact:
-    cloud_vpn_initiator_instance_size: "{{ cloud_vpn_initiator_instance_size | default('Standard_D2_V2') }}"
-
-- include_tasks: azure_instance/initiator/provision.yaml

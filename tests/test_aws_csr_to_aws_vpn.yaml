@@ -9,7 +9,8 @@
     cloud_vpn_psk: mypsksecret
     cloud_vpn_name: test-aws-csr-to-aws-vpn
     cloud_vpn_responder_type: aws_vpn
-    cloud_vpn_initiator_type: aws_csr
+    cloud_vpn_initiator_type: csr
+    cloud_vpn_initiator_provisioning_type: aws
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_outside_interface: GigabitEthernet1

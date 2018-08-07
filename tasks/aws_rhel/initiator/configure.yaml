@@ -1,3 +1,0 @@
----
-- name: Include RHEL as initiator configure tasks
-  include_tasks: "rhel/initiator/configure.yaml"

@@ -1,10 +1,20 @@
 ---
 
 - name: Include responder provision tasks
-  include_tasks: "{{ cloud_vpn_responder_type }}/responder/provision.yaml"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ cloud_vpn_responder_provisioning_type }}/responder/provision.yaml"
+        - "{{ cloud_vpn_responder_type }}/responder/provision.yaml"
+      skip: True
 
 - name: Include initiator provision tasks
-  include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/provision.yaml"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ cloud_vpn_initiator_provisioning_type }}/initiator/provision.yaml"
+        - "{{ cloud_vpn_initiator_type }}/initiator/provision.yaml"
+      skip: True
 
 - name: Include responder configure VPN tasks
   include_tasks: "{{ cloud_vpn_responder_type }}/responder/configure.yaml"

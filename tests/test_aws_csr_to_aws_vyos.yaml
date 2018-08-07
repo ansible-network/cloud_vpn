@@ -8,14 +8,16 @@
   vars:
     cloud_vpn_psk: mypsksecret
     cloud_vpn_name: test-aws-csr-to-aws-vyos
-    cloud_vpn_responder_type: aws_vyos
+    cloud_vpn_responder_type: vyos
+    cloud_vpn_responder_provisioning_type: aws
     cloud_vpn_responder_vpc_cidr: 10.0.0.0/16
     cloud_vpn_responder_cidr: 10.0.0.0/24
     cloud_vpn_responder_outside_interface: eth0
     cloud_vpn_responder_private_ip: 10.0.0.145
     cloud_vpn_responder_user: vyos
     cloud_vpn_responder_key_name: "{{ cloud_vpn_name }}-key"
-    cloud_vpn_initiator_type: aws_csr
+    cloud_vpn_initiator_type: csr
+    cloud_vpn_initiator_provisioning_type: aws
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_outside_interface: GigabitEthernet1

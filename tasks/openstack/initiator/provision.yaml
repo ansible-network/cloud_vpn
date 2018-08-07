@@ -1,0 +1,42 @@
+---
+
+- name: Include provider get default tasks
+  include_tasks: "get_{{ cloud_vpn_initiator_type }}_defaults.yaml"
+
+- block:
+    - name: Get VPC facts
+      os_networks_facts:
+        cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
+        name: "{{ cloud_vpn_initiator_vpc_id }}"
+
+    - name: Set VPC subnet ID
+      set_fact:
+        cloud_vpn_initiator_subnet_id: "{{ openstack_networks[0]['subnets'][0] }}"
+
+    - name: Generate initiator provision template
+      template:
+        src: openstack_instance/initiator/provision_in_existing_vpc.j2
+        dest: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+  when: cloud_vpn_initiator_vpc_id is defined
+
+- name: Generate initiator provision template
+  template:
+    src: openstack_instance/initiator/provision.j2
+    dest: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+  when: cloud_vpn_initiator_vpc_id is not defined
+
+- name: Create initiator stack
+  os_stack:
+    cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
+    name: "{{ cloud_vpn_name }}-initiator-stack"
+    template: "/tmp/{{ cloud_vpn_name }}-initiator-provision.template"
+
+- name: Get instance facts
+  os_server_facts:
+    cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
+    server: "{{ cloud_vpn_name }}-initiator-instance"
+  register: out
+
+- name: Set initiator IP
+  set_fact:
+    cloud_vpn_initiator_ip: "{{ openstack_servers[0]['interface_ip'] }}"

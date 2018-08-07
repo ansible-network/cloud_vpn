@@ -1,3 +1,0 @@
----
-- name: Include CSR as initiator tasks
-  include_tasks: csr/initiator/configure.yaml
