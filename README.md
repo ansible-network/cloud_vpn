@@ -18,6 +18,7 @@ The functions included allow to:
 * AWS VPN
 * VyOS
 * Cisco CSR
+* RHEL/CentOS
 
 ## Requirements
 

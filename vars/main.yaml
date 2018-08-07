@@ -9,3 +9,7 @@ peer_type_to_config:
   azure_csr: csr
   csr: csr
   aws_vpn: aws_vpn
+  aws_rhel: rhel
+  openstack_rhel: rhel
+  azure_rhel: rhel
+  rhel: rhel
