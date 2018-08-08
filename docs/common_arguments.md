@@ -11,7 +11,7 @@ This value sets the PSK secret.
 
 This value is *required*.
 
-## cloud_vpn_routing_type
+## cloud_vpn_routing
 
 This value sets the routing type for the IPSEC tunnel.
 
@@ -22,7 +22,11 @@ Valid choices are:
 
 It defaults to `static`.
 
-## cloud_vpn_initiator_type
+## cloud_vpn_initiator_provider_role
+
+This value sets the initiator provider name, in case the provider sits in an external role.
+
+## cloud_vpn_initiator_provider
 
 This value sets the initiator provider type.
 
@@ -43,7 +47,11 @@ This value sets the CIDR of the initiator.
 
 This value sets the initiator BGP ASN.
 
-## cloud_vpn_responder_type
+## cloud_vpn_responder_provider_role
+
+This value sets the initiator provider name, in case the provider sits in an external role.
+
+## cloud_vpn_responder_provider
 
 This value sets the responder provider type.
 

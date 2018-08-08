@@ -1,3 +1,0 @@
----
-host_key_checking: False
-persistent_command_timeout: 60

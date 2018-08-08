@@ -1,0 +1,12 @@
+conn {{ cloud_vpn_name }}
+    left={{ cloud_vpn_responder_private_ip }}
+    leftid={{ cloud_vpn_responder_public_ip }}
+    right={{ cloud_vpn_initiator_public_ip }}
+    authby=secret
+    leftsubnet=0.0.0.0/0
+    rightsubnet=0.0.0.0/0
+    auto=start
+    mark=5/0xffffffff
+    vti-interface=vti01
+    vti-routing=no
+    leftvti={{ cloud_vpn_responder_tunnel_ip }}/30

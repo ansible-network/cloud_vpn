@@ -13,11 +13,11 @@ created by the `created_vpn` function.
   vars:
     cloud_vpn_name: aws-vyos-to-aws-vpn
     cloud_vpn_state: absent
-    cloud_vpn_responder_type: aws_vpn
+    cloud_vpn_responder_provider: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_type: aws_vyos
+    cloud_vpn_initiator_provider: aws_vyos
     cloud_vpn_initiator_aws_access_key: myaswaccesskey
     cloud_vpn_initiator_aws_secret_key: myawssecretkey
     cloud_vpn_initiator_aws_region: us-east-2
@@ -36,11 +36,11 @@ created by the `created_vpn` function.
 
   vars:
     cloud_vpn_name: aws-vyos-to-aws-vpn
-    cloud_vpn_responder_type: aws_vpn
+    cloud_vpn_responder_provider: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_type: aws_vyos
+    cloud_vpn_initiator_provider: aws_vyos
     cloud_vpn_initiator_aws_access_key: myaswaccesskey
     cloud_vpn_initiator_aws_secret_key: myawssecretkey
     cloud_vpn_initiator_aws_region: us-east-2
