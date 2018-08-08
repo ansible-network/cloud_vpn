@@ -1,39 +1,59 @@
 ---
 
 - name: Include responder provision tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - files:
-        - "{{ cloud_vpn_responder_provisioning_type }}/responder/provision.yaml"
-        - "{{ cloud_vpn_responder_type }}/responder/provision.yaml"
-      skip: True
+  include_tasks: "provisioners/{{ cloud_vpn_responder_provisioner }}/responder/provision.yaml"
+  when: cloud_vpn_responder_provisioner is defined
 
 - name: Include initiator provision tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - files:
-        - "{{ cloud_vpn_initiator_provisioning_type }}/initiator/provision.yaml"
-        - "{{ cloud_vpn_initiator_type }}/initiator/provision.yaml"
-      skip: True
+  include_tasks: "provisioners/{{ cloud_vpn_initiator_provisioner }}/initiator/provision.yaml"
+  when: cloud_vpn_initiator_provisioner is defined
+
+- name: Include responder role configure VPN tasks
+  include_role:
+    name: "{{ cloud_vpn_responder_provider_role }}"
+    tasks_from: "providers/{{ cloud_vpn_responder_provider }}/responder/configure"
+  when: cloud_vpn_responder_provider_role is defined
 
 - name: Include responder configure VPN tasks
-  include_tasks: "{{ cloud_vpn_responder_type }}/responder/configure.yaml"
+  include_tasks: "providers/{{ cloud_vpn_responder_provider }}/responder/configure.yaml"
+  when: cloud_vpn_responder_provider_role is not defined
+
+- name: Include initiator role configure VPN tasks
+  include_role:
+    name: "{{ cloud_vpn_initiator_provider_role }}"
+    tasks_from: "providers/{{ cloud_vpn_initiator_provider }}/initiator/configure"
+  when: cloud_vpn_initiator_provider_role is defined
 
 - name: Include initiator configure VPN tasks
-  include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/configure.yaml"
+  include_tasks: "providers/{{ cloud_vpn_initiator_provider }}/initiator/configure.yaml"
+  when: cloud_vpn_initiator_provider_role is not defined
+
+- name: Include responder role configure routing tasks
+  include_role:
+    name: "{{ cloud_vpn_responder_provider_role }}"
+    tasks_from: "providers/{{ cloud_vpn_responder_provider }}/responder/configure_routing"
+  when: cloud_vpn_responder_provider_role is defined
 
 - name: Include responder configure routing tasks
-  include_tasks: "{{ cloud_vpn_responder_type }}/responder/configure_routing.yaml"
+  include_tasks: "providers/{{ cloud_vpn_responder_provider }}/responder/configure_routing.yaml"
+  when: cloud_vpn_responder_provider_role is not defined
+
+- name: Include initiator role configure routing tasks
+  include_role:
+    name: "{{ cloud_vpn_initiator_provider_role }}"
+    tasks_from: "providers/{{ cloud_vpn_initiator_provider }}/initiator/configure_routing"
+  when: cloud_vpn_initiator_provider_role is defined
 
 - name: Include initiator configure routing tasks
-  include_tasks: "{{ cloud_vpn_initiator_type }}/initiator/configure_routing.yaml"
+  include_tasks: "providers/{{ cloud_vpn_initiator_provider }}/initiator/configure_routing.yaml"
+  when: cloud_vpn_initiator_provider_role is not defined
 
 - name: Show initiator IP and user
   debug:
-    msg: "Initiator has IP {{ cloud_vpn_initiator_ip }} and user {{ cloud_vpn_initiator_user }}"
+    msg: "Initiator can be reached at {{ cloud_vpn_initiator_user }}@{{ cloud_vpn_initiator_public_ip }}"
   when: cloud_vpn_initiator_user is defined
 
 - name: Show responder IP and user
   debug:
-    msg: "Responder has IP {{ cloud_vpn_responder_ip }} and user {{ cloud_vpn_responder_user }}"
+    msg: "Responder can be reached at {{ cloud_vpn_responder_user}}@{{ cloud_vpn_responder_public_ip }}"
   when: cloud_vpn_responder_user is defined

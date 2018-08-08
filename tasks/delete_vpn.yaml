@@ -1,17 +1,9 @@
 ---
 
 - name: Include initiator deprovision tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - files:
-        - "{{ cloud_vpn_initiator_provisioning_type }}/initiator/deprovision.yaml"
-        - "{{ cloud_vpn_initiator_type }}/initiator/deprovision.yaml"
-      skip: True
+  include_tasks: "provisioners/{{ cloud_vpn_initiator_provisioner }}/initiator/deprovision.yaml"
+  when: cloud_vpn_initiator_provisioner is defined
 
 - name: Include responder deprovision tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - files:
-        - "{{ cloud_vpn_responder_provisioning_type }}/responder/deprovision.yaml"
-        - "{{ cloud_vpn_responder_type }}/responder/deprovision.yaml"
-      skip: True
+  include_tasks: "provisioners/{{ cloud_vpn_responder_provisioner }}/responder/deprovision.yaml"
+  when: cloud_vpn_responder_provisioner is defined

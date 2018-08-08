@@ -1,13 +1,13 @@
 # Arguments
 
-## cloud_vpn_initiator_ip
+## cloud_vpn_initiator_public_ip
 
 This value sets the public IP of the initiator.
 
 ## cloud_vpn_initiator_mgmt_ip
 
 This value sets the management IP of the initiator if it differs
-from `cloud_vpn_initiator_ip` argument.
+from `cloud_vpn_initiator_public_ip` argument.
 
 ## cloud_vpn_initiator_private_ip
 
@@ -26,14 +26,14 @@ the IPSEC configuration.
 
 This value sets the SSH private key file to use for connecting to the initiator.
 
-## cloud_vpn_responder_ip
+## cloud_vpn_responder_public_ip
 
 This value sets the public IP of the responder.
 
 ## cloud_vpn_responder_mgmt_ip
 
 This value sets the management IP of the responder if it differs
-from `cloud_vpn_responder_ip` argument.
+from `cloud_vpn_responder_public_ip` argument.
 
 ## cloud_vpn_responder_private_ip
 
