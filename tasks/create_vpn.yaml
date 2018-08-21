@@ -26,5 +26,5 @@
 - name: Include confgiure routing initiator tasks
   include_tasks: configure_routing_initiator.yaml
 
-- name: Include show login info tasks 
+- name: Include show login info tasks
   include_tasks: show_login_info.yaml
