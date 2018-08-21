@@ -14,10 +14,14 @@ provisioned or they can also be provisioned dynamically.
 
   vars:
     cloud_vpn_psk: mypsksecret
+    cloud_vpn_responder_provider_role: cloud_vpn_aws_vpn_provider
     cloud_vpn_responder_provider: aws_vpn
+    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_vpn_provisioner
+    cloud_vpn_responder_provisioner: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
+    cloud_vpn_initiator_provider_role: cloud_vpn_vyos_provider
     cloud_vpn_initiator_provider: vyos
     cloud_vpn_initiator_public_ip: 18.191.132.220
     cloud_vpn_initiator_cidr: 192.168.0.0/24
@@ -29,7 +33,7 @@ provisioned or they can also be provisioned dynamically.
 
   tasks:
     - include_role:
-        name: cloud-vpn
+        name: cloud_vpn
 ```
 
 ## Create IPSEC VPN between a dynamically provisioned AWS VyOS VM and AWS VPN
@@ -41,11 +45,18 @@ provisioned or they can also be provisioned dynamically.
 
   vars:
     cloud_vpn_psk: mypsksecret
+    cloud_vpn_responder_provider_role: cloud_vpn_aws_vpn_provider
     cloud_vpn_responder_provider: aws_vpn
+    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_vpn_provisioner
+    cloud_vpn_responder_provisioner: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_provider: aws_vyos
+    cloud_vpn_initiator_provider_role: cloud_vpn_vyos_provider
+    cloud_vpn_initiator_provider: vyos
+    cloud_vpn_initiator_provisioner_role: cloud_vpn_aws_provisioner
+    cloud_vpn_initiator_provisioner: aws
+    cloud_vpn_initiator_instance_size: t2.micro
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_outside_interface: eth0
@@ -60,7 +71,7 @@ provisioned or they can also be provisioned dynamically.
 
   tasks:
     - include_role:
-        name: cloud-vpn
+        name: cloud_vpn
 ```
 
 ## Create IPSEC VPN between an on-premise CSR device and AWS VPN
@@ -72,10 +83,14 @@ provisioned or they can also be provisioned dynamically.
 
   vars:
     cloud_vpn_psk: mypsksecret
+    cloud_vpn_responder_provider_role: cloud_vpn_aws_vpn_provider
     cloud_vpn_responder_provider: aws_vpn
+    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_vpn_provisioner
+    cloud_vpn_responder_provisioner: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
+    cloud_vpn_initiator_provider_role: cloud_vpn_csr_provider
     cloud_vpn_initiator_provider: csr
     cloud_vpn_initiator_public_ip: 18.191.154.71
     cloud_vpn_initiator_cidr: 192.168.0.0/24
@@ -88,7 +103,7 @@ provisioned or they can also be provisioned dynamically.
 
   tasks:
     - include_role:
-        name: cloud-vpn
+        name: cloud_vpn
 ```
 
 ## Create IPSEC VPN between a dynamically provisioned AWS CSR VM and AWS VPN
@@ -100,12 +115,19 @@ provisioned or they can also be provisioned dynamically.
 
   vars:
     cloud_vpn_psk: mypsksecret
+    cloud_vpn_responder_provider_role: cloud_vpn_aws_vpn_provider
     cloud_vpn_responder_provider: aws_vpn
+    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_vpn_provisioner
+    cloud_vpn_respnoder_provisioner: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
     cloud_vpn_initiator_key_name: aws
-    cloud_vpn_initiator_provider: aws_csr
+    cloud_vpn_initiator_provider_role: cloud_vpn_csr_provider
+    cloud_vpn_initiator_provider: csr
+    cloud_vpn_initiator_provisioner_role: cloud_vpn_aws_provisioner
+    cloud_vpn_initiator_provisioner: aws
+    cloud_vpn_initiator_instance_size: c4.large
     cloud_vpn_initiator_vpc_cidr: 192.168.0.0/16
     cloud_vpn_initiator_cidr: 192.168.0.0/24
     cloud_vpn_initiator_outside_interface: GigabitEthernet1
@@ -118,7 +140,7 @@ provisioned or they can also be provisioned dynamically.
 
   tasks:
     - include_role:
-        name: cloud-vpn
+        name: cloud_vpn
 ```
 
 ## Arguments
