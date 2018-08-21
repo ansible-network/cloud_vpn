@@ -13,18 +13,20 @@ created by the `created_vpn` function.
   vars:
     cloud_vpn_name: aws-vyos-to-aws-vpn
     cloud_vpn_state: absent
-    cloud_vpn_responder_provider: aws_vpn
+    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_vpn_provisioner
+    cloud_vpn_responder_provisioner: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_provider: aws_vyos
+    cloud_vpn_initiator_provisioner_role: cloud_vpn_aws_provisioner
+    cloud_vpn_initiator_provisioner: aws
     cloud_vpn_initiator_aws_access_key: myaswaccesskey
     cloud_vpn_initiator_aws_secret_key: myawssecretkey
     cloud_vpn_initiator_aws_region: us-east-2
 
   tasks:
     - include_role:
-        name: cloud-vpn
+        name: cloud_vpn
 ```
 
 ## Delete IPSEC VPN between AWS VyOS VM and AWS VPN by using tasks
@@ -36,17 +38,19 @@ created by the `created_vpn` function.
 
   vars:
     cloud_vpn_name: aws-vyos-to-aws-vpn
-    cloud_vpn_responder_provider: aws_vpn
+    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_vpn_provisioner
+    cloud_vpn_responder_provisioner: aws_vpn
     cloud_vpn_responder_aws_access_key: myaswaccesskey
     cloud_vpn_responder_aws_secret_key: myawssecretkey
     cloud_vpn_responder_aws_region: us-east-2
-    cloud_vpn_initiator_provider: aws_vyos
+    cloud_vpn_initiator_provisioner_role: cloud_vpn_aws_provisioner
+    cloud_vpn_initiator_provider: aws
     cloud_vpn_initiator_aws_access_key: myaswaccesskey
     cloud_vpn_initiator_aws_secret_key: myawssecretkey
     cloud_vpn_initiator_aws_region: us-east-2
 
   tasks:
     - include_role:
-        name: cloud-vpn
+        name: cloud_vpn
         tasks_from: delete_vpn
 ```

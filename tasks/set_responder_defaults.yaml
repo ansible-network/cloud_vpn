@@ -1,0 +1,6 @@
+---
+
+- name: Include responder set defaults tasks
+  include_role:
+    name: "{{ cloud_vpn_responder_provider_role }}"
+    tasks_from: "{{  cloud_vpn_responder_provider }}/responder/set_defaults"
