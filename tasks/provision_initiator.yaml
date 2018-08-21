@@ -1,0 +1,6 @@
+---
+
+- name: Include initiator role provision tasks
+  include_role:
+    name: "{{ cloud_vpn_initiator_provisioner_role }}"
+    tasks_from: "{{ cloud_vpn_initiator_provisioner }}/initiator/provision"

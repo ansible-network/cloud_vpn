@@ -1,7 +1,0 @@
----
-
-- name: Delete initiator stack
-  os_stack:
-    cloud: "{{ cloud_vpn_initiator_openstack_cloud }}"
-    name: "{{ cloud_vpn_name }}-initiator-stack"
-    state: absent
