@@ -3,4 +3,4 @@
 - name: Include responder role show login info tasks
   include_role:
     name: "{{ cloud_vpn_responder_provider_role }}"
-    tasks_from: "{{ cloud_vpn_responder_provider }}/responder/show_login_info"
+    tasks_from: "cloud_vpn/show_login_info_responder"

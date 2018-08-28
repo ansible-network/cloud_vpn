@@ -9,15 +9,15 @@
     cloud_vpn_psk: mypsksecret
     cloud_vpn_routing: bgp
     cloud_vpn_name: test-aws-vyos-to-aws-vyos-bgp
-    cloud_vpn_responder_provider_role: cloud_vpn_vyos_provider
+    cloud_vpn_responder_provider_role: vyos
     cloud_vpn_responder_provider: vyos
-    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_provisioner
+    cloud_vpn_responder_provisioner_role: aws
     cloud_vpn_responder_provisioner: aws
     cloud_vpn_responder_instance_size: t2.micro
     cloud_vpn_responder_key_name: "{{ cloud_vpn_name }}-key"
-    cloud_vpn_initiator_provider_role: cloud_vpn_vyos_provider
+    cloud_vpn_initiator_provider_role: vyos
     cloud_vpn_initiator_provider: vyos
-    cloud_vpn_initiator_provisioner_role: cloud_vpn_aws_provisioner
+    cloud_vpn_initiator_provisioner_role: aws
     cloud_vpn_initiator_provisioner: aws
     cloud_vpn_initiator_instance_size: t2.micro
     cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-key"
