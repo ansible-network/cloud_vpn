@@ -18,7 +18,7 @@
     cloud_vpn_initiator_provisioner: aws
     cloud_vpn_initiator_instance_size: t2.micro
     cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-key"
-    ansible_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
+    cloud_vpn_initiator_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
 
   tasks:
     - block:
@@ -31,7 +31,7 @@
             state: absent
 
         - file:
-            path: "{{ ansible_ssh_private_key_file }}"
+            path: "{{ cloud_vpn_initiator_ssh_private_key_file }}"
             state: absent
 
         - cloudformation:
@@ -68,7 +68,7 @@
           no_log: True
 
         - copy:
-            dest: "{{ ansible_ssh_private_key_file }}"
+            dest: "{{ cloud_vpn_initiator_ssh_private_key_file }}"
             content: "{{ out.key.private_key }}"
             mode: 0400
 
@@ -93,7 +93,7 @@
           delegate_to: initiator
       always:
         - file:
-            path: "{{ ansible_ssh_private_key_file }}"
+            path: "{{ cloud_vpn_initiator_ssh_private_key_file }}"
             state: absent
 
         - ec2_key:
