@@ -29,7 +29,7 @@ upfront to be used by cloud_vpn. Check it out links below.
 ## Requirements
 
 * Ansible 2.6 or later
-* [requirements.txt](requirements.txt) packages
+* [requirements.txt](https://github.com/ansible-network/cloud_vpn/blob/devel/requirements.txt) packages
 
 ## Installation
 
@@ -43,8 +43,8 @@ in this role.
 Please see the documentation link for each function for details on how to use
 the function in an Ansible playbook.
 
-* create_vpn [[docs]](docs/create_vpn.md) [[source]](tasks/create_vpn.yaml)
-* delete_vpn [[docs]](docs/delete_vpn.md) [[source]](tasks/delete_vpn.yaml)
+* create_vpn [[docs]](https://github.com/ansible-network/cloud_vpn/blob/devel/docs/create_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/create_vpn.yaml)
+* delete_vpn [[docs]](https://github.com/ansible-network/cloud_vpn/blob/devel/docs/delete_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/delete_vpn.yaml)
 
 ## License
 
