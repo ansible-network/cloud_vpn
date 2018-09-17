@@ -2,12 +2,24 @@
 Ansible Network cloud_vpn
 =========================
 
-.. _Ansible Network cloud_vpn_0.0.0:
+v2.6.2
+=======
 
-0.0.0
-=====
+Minor Changes
+-------------
 
-.. _Ansible Network cloud_vpn_0.0.0_Major Changes:
+- Decouple provisioners and providers on their own roles, which will be available from Galaxy.
+
+v2.6.1
+=======
+
+Minor Changes
+-------------
+
+- Rename meta/main.yaml to meta/main.yml to avoid Galaxy upload issues.
+
+v2.6.0
+======
 
 Major Changes
 -------------
