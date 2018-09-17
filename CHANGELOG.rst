@@ -8,7 +8,7 @@ v2.6.2
 Minor Changes
 -------------
 
-- Decouple provisioners and providers on their own roles which 
+- Decouple provisioners and providers on their own roles which
   will be available from Galaxy.
 
 v2.6.1
