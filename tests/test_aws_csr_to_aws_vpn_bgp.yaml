@@ -9,17 +9,17 @@
     cloud_vpn_psk: mypsksecret
     cloud_vpn_name: test-aws-csr-to-aws-vpn-bgp
     cloud_vpn_routing: bgp
-    cloud_vpn_responder_provider_role: cloud_vpn_aws_vpn_provider
+    cloud_vpn_responder_provider_role: aws
     cloud_vpn_responder_provider: aws_vpn
-    cloud_vpn_responder_provisioner_role: cloud_vpn_aws_vpn_provisioner
+    cloud_vpn_responder_provisioner_role: aws
     cloud_vpn_responder_provisioner: aws_vpn
-    cloud_vpn_initiator_provider_role: cloud_vpn_csr_provider
+    cloud_vpn_initiator_provider_role: cisco_ios
     cloud_vpn_initiator_provider: csr
-    cloud_vpn_initiator_provisioner_role: cloud_vpn_aws_provisioner
+    cloud_vpn_initiator_provisioner_role: aws
     cloud_vpn_initiator_provisioner: aws
     cloud_vpn_initiator_instance_size: c4.large
     cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-key"
-    ansible_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
+    cloud_vpn_initiator_ssh_private_key_file: "/tmp/{{ cloud_vpn_name }}.key"
 
   tasks:
     - block:
@@ -32,7 +32,7 @@
             state: absent
 
         - file:
-            path: "{{ ansible_ssh_private_key_file }}"
+            path: "{{ cloud_vpn_initiator_ssh_private_key_file }}"
             state: absent
 
         - cloudformation:
@@ -69,7 +69,7 @@
           no_log: True
 
         - copy:
-            dest: "{{ ansible_ssh_private_key_file }}"
+            dest: "{{ cloud_vpn_initiator_ssh_private_key_file }}"
             content: "{{ out.key.private_key }}"
             mode: 0400
 
@@ -94,7 +94,7 @@
           delegate_to: initiator
       always:
         - file:
-            path: "{{ ansible_ssh_private_key_file }}"
+            path: "{{ cloud_vpn_initiator_ssh_private_key_file }}"
             state: absent
 
         - ec2_key:

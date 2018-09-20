@@ -1,4 +1,4 @@
-cloud_vpn
+Cloud_vpn
 =========
 
 This Ansible Network role provides functions to manage IPSEC VPN tunnels.
@@ -14,22 +14,22 @@ upfront to be used by cloud_vpn. Check it out links below.
 
 ## Supported cloud providers
 
-* [AWS](https://github.com/ansible-network/cloud_vpn_aws_provisioner)
-* [AWS VPN](https://github.com/ansible-network/cloud_vpn_aws_vpn_provisioner)
-* [Azure](https://github.com/ansible-network/cloud_vpn_azure_provisioner)
-* [OpenStack](https://github.com/ansible-network/cloud_vpn_openstack_provisioner)
+* [AWS](https://github.com/ansible-network/aws)
+* [AWS VPN](https://github.com/ansible-network/aws)
+* [Azure](https://github.com/ansible-network/azure)
+* [OpenStack](https://github.com/ansible-network/openstack)
 
 ## Supported VPN endpoints
 
-* [AWS VPN](https://github.com/ansible-network/cloud_vpn_aws_vpn_provider)
-* [VyOS](https://github.com/ansible-network/cloud_vpn_vyos_provider)
-* [Cisco CSR](https://github.com/ansible-network/cloud_vpn_csr_provider)
-* [RHEL/CentOS](https://github.com/ansible-network/cloud_vpn_rhel_provider)
+* [AWS VPN](https://github.com/ansible-network/aws)
+* [VyOS](https://github.com/ansible-network/vyos)
+* [Cisco CSR](https://github.com/ansible-network/cisco_ios)
+* [RHEL/CentOS](https://github.com/ansible-network/rhel)
 
 ## Requirements
 
 * Ansible 2.6 or later
-* [requirements.txt](requirements.txt) packages
+* [requirements.txt](https://github.com/ansible-network/cloud_vpn/blob/devel/requirements.txt) packages
 
 ## Installation
 
@@ -43,8 +43,8 @@ in this role.
 Please see the documentation link for each function for details on how to use
 the function in an Ansible playbook.
 
-* create_vpn [[docs]](docs/create_vpn.md) [[source]](tasks/create_vpn.yaml)
-* delete_vpn [[docs]](docs/delete_vpn.md) [[source]](tasks/delete_vpn.yaml)
+* create_vpn [[docs]](https://github.com/ansible-network/cloud_vpn/blob/devel/docs/create_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/create_vpn.yaml)
+* delete_vpn [[docs]](https://github.com/ansible-network/cloud_vpn/blob/devel/docs/delete_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/delete_vpn.yaml)
 
 ## License
 

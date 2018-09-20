@@ -1,0 +1,2 @@
+minor_changes:
+- Decouple provisioners and providers on their own roles, which will be available from Galaxy.
