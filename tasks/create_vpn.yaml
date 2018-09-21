@@ -1,11 +1,5 @@
 ---
 
-- name: Include set responder defaults tasks
-  include_tasks: set_responder_defaults.yaml
-
-- name: Include set initiator defaults tasks
-  include_tasks: set_initiator_defaults.yaml
-
 - name: Include provision responder tasks if needed
   include_tasks: provision_responder.yaml
   when: cloud_vpn_responder_provisioner_role is defined
@@ -13,6 +7,18 @@
 - name: Include provision initiator tasks if needed
   include_tasks: provision_initiator.yaml
   when: cloud_vpn_initiator_provisioner_role is defined
+
+- name: Include set responder defaults tasks
+  include_tasks: set_responder_defaults.yaml
+
+- name: Include set initiator defaults tasks
+  include_tasks: set_initiator_defaults.yaml
+
+- name: Include add host responder tasks
+  include_tasks: add_host_responder.yaml
+
+- name: Include add host initiator tasks
+  include_tasks: add_host_initiator.yaml
 
 - name: Include configure vpn responder tasks
   include_tasks: configure_vpn_responder.yaml
@@ -23,8 +29,11 @@
 - name: Include configure routing responder tasks
   include_tasks: configure_routing_responder.yaml
 
-- name: Include confgiure routing initiator tasks
+- name: Include configure routing initiator tasks
   include_tasks: configure_routing_initiator.yaml
 
-- name: Include show login info tasks
-  include_tasks: show_login_info.yaml
+- name: Include show login info responder tasks
+  include_tasks: show_login_info_responder.yaml
+
+- name: Include show login info initiator tasks
+  include_tasks: show_login_info_initiator.yaml
