@@ -1,3 +1,6 @@
+AUTHORS
+ChangeLog
 tests/*.retry
 tests/output/
 tests/secrets.yaml
+.tox
