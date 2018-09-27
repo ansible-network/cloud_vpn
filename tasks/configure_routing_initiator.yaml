@@ -3,4 +3,4 @@
 - name: Include initiator role configure routing tasks
   include_role:
     name: "{{ cloud_vpn_initiator_provider_role }}"
-    tasks_from: "{{ cloud_vpn_initiator_provider }}/initiator/configure_routing"
+    tasks_from: "cloud_vpn/configure_routing_initiator"

@@ -3,4 +3,4 @@
 - name: Include initiator set defaults tasks
   include_role:
     name: "{{ cloud_vpn_initiator_provider_role }}"
-    tasks_from: "{{ cloud_vpn_initiator_provider }}/initiator/set_defaults"
+    tasks_from: "cloud_vpn/set_defaults_initiator"
