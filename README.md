@@ -53,3 +53,4 @@ GPLv3
 ## Author information
 
 Ricardo Carrillo Cruz (rcarrillocruz)
+Paul Belanger (pabelanger)
