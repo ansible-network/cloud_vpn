@@ -3,4 +3,4 @@
 - name: Include responder role configure VPN tasks
   include_role:
     name: "{{ cloud_vpn_responder_provider_role }}"
-    tasks_from: "{{ cloud_vpn_responder_provider }}/responder/configure_vpn"
+    tasks_from: "cloud_vpn/configure_vpn_responder"

@@ -1,0 +1,6 @@
+---
+
+- name: Include initiator role add host tasks
+  include_role:
+    name: "{{ cloud_vpn_initiator_provider_role }}"
+    tasks_from: "cloud_vpn/add_host_initiator"
