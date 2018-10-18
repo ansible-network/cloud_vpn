@@ -43,8 +43,8 @@ in this role.
 Please see the documentation link for each function for details on how to use
 the function in an Ansible playbook.
 
-* create_vpn [[docs]](https://github.com/ansible-network/cloud_vpn/blob/devel/docs/create_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/create_vpn.yaml)
-* delete_vpn [[docs]](https://github.com/ansible-network/cloud_vpn/blob/devel/docs/delete_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/delete_vpn.yaml)
+* create_vpn [[doc]](https://github.com/ansible-network/cloud_vpn/blob/devel/doc/create_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/create_vpn.yaml)
+* delete_vpn [[doc]](https://github.com/ansible-network/cloud_vpn/blob/devel/doc/delete_vpn.md)[[source]](https://github.com/ansible-network/cloud_vpn/blob/devel/tasks/delete_vpn.yaml)
 
 ## License
 
