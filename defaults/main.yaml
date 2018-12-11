@@ -7,6 +7,7 @@ cloud_vpn_tunnel_cidr: 169.254.56.24/30
 cloud_vpn_tunnel_failover_cidr: 169.254.56.28/30
 
 cloud_vpn_routing: static
+cloud_vpn_mode: main
 
 cloud_vpn_initiator_vpc_cidr: 10.0.0.0/16
 cloud_vpn_initiator_cidr: 10.0.0.0/24
