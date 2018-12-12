@@ -1,2 +1,3 @@
+---
 minor_changes:
   - Rename meta/main.yaml to meta/main.yml to avoid Galaxy upload issues.

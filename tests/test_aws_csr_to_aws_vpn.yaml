@@ -1,6 +1,7 @@
+---
 - hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: false
 
   vars_files:
     - "{{ playbook_dir }}/secrets.yaml"
@@ -65,7 +66,7 @@
             security_token: "{{ cloud_vpn_initiator_aws_security_token | default(omit) }}"
             region: "{{ cloud_vpn_initiator_aws_region }}"
           register: out
-          no_log: True
+          no_log: false
 
         - copy:
             dest: "{{ cloud_vpn_initiator_ssh_private_key_file }}"
