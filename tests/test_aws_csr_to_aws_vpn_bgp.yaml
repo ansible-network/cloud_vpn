@@ -81,14 +81,14 @@
 
         - ios_command:
             commands:
-            - ping 169.254.56.25 repeat 10
+              - ping 169.254.56.25 repeat 10
           register: out
           failed_when: "'Sucess rate is 0 percent' in out.stdout_lines[-1]"
           delegate_to: initiator
 
         - ios_command:
             commands:
-            - ping 169.254.56.29 repeat 10
+              - ping 169.254.56.29 repeat 10
           register: out
           failed_when: "'Sucess rate is 0 percent' in out.stdout_lines[-1]"
           delegate_to: initiator
