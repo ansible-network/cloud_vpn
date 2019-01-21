@@ -8,11 +8,11 @@
   include_tasks: provision_initiator.yaml
   when: cloud_vpn_initiator_provisioner_role is defined
 
-- name: Include set responder defaults tasks
-  include_tasks: set_responder_defaults.yaml
+- name: Load responder provider defaults
+  include_tasks: load_responder_defaults.yaml
 
-- name: Include set initiator defaults tasks
-  include_tasks: set_initiator_defaults.yaml
+- name: Load initiator provider defaults
+  include_tasks: load_initiator_defaults.yaml
 
 - name: Include add host responder tasks
   include_tasks: add_host_responder.yaml

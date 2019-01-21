@@ -1,0 +1,8 @@
+---
+
+- name: Load responder provider defaults
+  include_role:
+    name: "{{ cloud_vpn_responder_provider_role }}"
+    defaults_from: "cloud_vpn/providers/{{ cloud_vpn_responder_provider }}/responder"
+    tasks_from: "cloud_vpn/noop"
+    public: true
