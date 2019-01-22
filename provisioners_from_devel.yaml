@@ -1,0 +1,4 @@
+---
+- src: https://github.com/ansible-network/aws
+- src: https://github.com/ansible-network/azure
+- src: https://github.com/ansible-network/openstack
