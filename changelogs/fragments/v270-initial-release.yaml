@@ -1,0 +1,8 @@
+---
+major_changes:
+  - Ansible 2.7 release of the ``cloud_vpn`` Ansible role.
+minor_changes:
+  - Use include_role defaults_from to load provider defaults
+  - Add default var for IPSEC mode, to support aggressive mode in providers
+  - Add logic to install pip requirements
+  - Add logic to install supported providers and provisioners with Ansible Galaxy CLI
