@@ -1,0 +1,6 @@
+---
+
+- name: Install required pip packages from requirements.txt file
+  pip:
+    requirements: "{{ role_path }}/requirements.txt"
+    extra_args: --user

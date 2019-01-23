@@ -1,0 +1,5 @@
+---
+- src: https://github.com/ansible-network/aws
+- src: https://github.com/ansible-network/cisco_ios
+- src: https://github.com/ansible-network/vyos
+- src: https://github.com/ansible-network/rhel

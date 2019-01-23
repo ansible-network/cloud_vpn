@@ -1,0 +1,5 @@
+---
+- src: ansible-network.aws
+- src: ansible-network.cisco_ios
+- src: ansible-network.vyos
+- src: ansible-network.rhel
