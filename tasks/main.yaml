@@ -4,14 +4,6 @@
   include_tasks: install_pip_requirements.yaml
   when: cloud_vpn_install_pip_requirements
 
-- name: Install provisioners from file
-  include_tasks: install_provisioners.yaml
-  when: cloud_vpn_install_provisioners
-
-- name: Install providers from file
-  include_tasks: install_providers.yaml
-  when: cloud_vpn_install_providers
-
 - name: Include create VPN tasks
   include_tasks: create_vpn.yaml
   when: cloud_vpn_state == 'present'

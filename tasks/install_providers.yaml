@@ -1,4 +1,0 @@
----
-
-- name: Install provider roles from file
-  shell: "ansible-galaxy install --ignore-errors -r {{ cloud_vpn_providers_file }}"

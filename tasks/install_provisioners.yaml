@@ -1,4 +1,0 @@
----
-
-- name: Install provisioner roles from file
-  shell: "ansible-galaxy install --ignore-errors -r {{ cloud_vpn_provisioners_file }}"
