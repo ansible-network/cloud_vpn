@@ -48,6 +48,7 @@
             region: "{{ cloud_vpn_responder_aws_region }}"
             state: absent
 
+        - cloudformation:
             stack_name: "{{ cloud_vpn_name }}-responder-igw-stack"
             aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
@@ -55,6 +56,7 @@
             region: "{{ cloud_vpn_responder_aws_region }}"
             state: absent
 
+        - cloudformation:
             stack_name: "{{ cloud_vpn_name }}-responder-vpc-stack"
             aws_access_key: "{{ cloud_vpn_responder_aws_access_key }}"
             aws_secret_key: "{{ cloud_vpn_responder_aws_secret_key }}"
