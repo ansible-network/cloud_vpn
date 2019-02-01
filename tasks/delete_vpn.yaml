@@ -1,5 +1,7 @@
 ---
 
+- include_tasks: unconfigure_responder.yaml
 - include_tasks: deprovision_responder.yaml
 
+- include_tasks: unconfigure_initiator.yaml
 - include_tasks: deprovision_initiator.yaml
