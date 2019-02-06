@@ -4,3 +4,4 @@
   include_role:
     name: "{{ cloud_vpn_initiator_provisioner_role }}"
     tasks_from: "cloud_vpn/deprovision_initiator"
+    defaults_from: "cloud_vpn/provisioners/{{ cloud_vpn_initiator_provisioner }}/initiator.yaml"
