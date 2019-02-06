@@ -4,10 +4,16 @@
   include_tasks: install_pip_requirements.yaml
   when: cloud_vpn_install_pip_requirements
 
-- name: Include create VPN tasks
-  include_tasks: create_vpn.yaml
-  when: cloud_vpn_state == 'present'
+- name: Include loop tunnels tasks
+  include_tasks: loop_tunnels.yaml
+  when: cloud_vpn_tunnels is defined
 
-- name: Include delete VPN tasks
-  include_tasks: delete_vpn.yaml
-  when: cloud_vpn_state == 'absent'
+- block:
+    - name: Include create VPN tasks
+      include_tasks: create_vpn.yaml
+      when: cloud_vpn_state == 'present'
+
+    - name: Include delete VPN tasks
+      include_tasks: delete_vpn.yaml
+      when: cloud_vpn_state == 'absent'
+  when: cloud_vpn_tunnels is not defined

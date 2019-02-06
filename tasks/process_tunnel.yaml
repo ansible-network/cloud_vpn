@@ -1,0 +1,28 @@
+---
+
+- name: Loading tunnel item vars
+  set_fact:
+    "cloud_vpn_{{ item.key }}": "{{ item.value }}"
+  loop: "{{ tunnel_item | dict2items }}"
+  when: item.key not in ['initiator', 'responder']
+  no_log: true
+
+- name: Loading tunnel item initiator vars
+  set_fact:
+    "cloud_vpn_initiator_{{ item.key }}": "{{ item.value }}"
+  loop: "{{ tunnel_item.initiator | dict2items }}"
+  no_log: true
+
+- name: Loading tunnel item responder vars
+  set_fact:
+    "cloud_vpn_responder_{{ item.key }}": "{{ item.value }}"
+  loop: "{{ tunnel_item.responder | dict2items }}"
+  no_log: true
+
+- name: Include create VPN tasks
+  include_tasks: create_vpn.yaml
+  when: "'state' not in tunnel_item.keys() or tunnel_item.state == 'present'"
+
+- name: Include delete VPN tasks
+  include_tasks: delete_vpn.yaml
+  when: "'state' in tunnel_item.keys() and tunnel_item.state == 'absent'"
