@@ -1,5 +1,7 @@
+---
+
 - name: Loop over cloud_vpn_tunnels list
   include_tasks: process_tunnel.yaml
   with_items: "{{ cloud_vpn_tunnels }}"
-  loop_control: 
+  loop_control:
     loop_var: tunnel_item
