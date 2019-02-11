@@ -1,0 +1,7 @@
+---
+
+- name: Include responder role get provisioner tasks
+  include_role:
+    name: "{{ cloud_vpn_responder_provisioner_role }}"
+    tasks_from: "cloud_vpn/get_provisioner_facts_responder"
+    defaults_from: "cloud_vpn/provisioners/{{ cloud_vpn_responder_provisioner }}/responder"

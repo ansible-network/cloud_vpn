@@ -1,0 +1,7 @@
+---
+
+- name: Include initiator role get provisioner facts tasks
+  include_role:
+    name: "{{ cloud_vpn_initiator_provisioner_role }}"
+    tasks_from: "cloud_vpn/get_provisioner_facts_initiator"
+    defaults_from: "cloud_vpn/provisioners/{{ cloud_vpn_initiator_provisioner }}/initiator.yaml"
