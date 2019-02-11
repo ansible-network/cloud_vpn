@@ -1,0 +1,9 @@
+---
+
+- name: Include get provisioner facts responder tasks if needed
+  include_tasks: get_provisioner_facts_responder.yaml
+  when: cloud_vpn_responder_provisioner_role is defined
+
+- name: Include get provisioner facts initiator tasks if needed
+  include_tasks: get_provisioner_facts_initiator.yaml
+  when: cloud_vpn_initiator_provisioner_role is defined
