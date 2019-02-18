@@ -1,0 +1,3 @@
+- name: Include post configure responder hooks tasks
+  include_tasks: "{{ cloud_vpn_responder_post_configure_hooks }}"
+  when: cloud_vpn_responder_post_configure_hooks is defined

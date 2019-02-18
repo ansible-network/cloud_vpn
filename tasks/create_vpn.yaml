@@ -32,6 +32,12 @@
 - name: Include configure routing initiator tasks
   include_tasks: configure_routing_initiator.yaml
 
+- name: Include post configure initiator hooks tasks
+  include_tasks: post_configure_initiator_hooks.yaml
+
+- name: Include post configure responder hooks tasks
+  include_tasks: post_configure_responder_hooks.yaml
+
 - name: Include show login info responder tasks
   include_tasks: show_login_info_responder.yaml
 
