@@ -1,0 +1,5 @@
+---
+
+- name: Include post configure initiator hooks tasks
+  include_tasks: "{{ cloud_vpn_initiator_post_configure_hooks }}"
+  when: cloud_vpn_initiator_post_configure_hooks is defined
