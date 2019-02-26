@@ -9,6 +9,8 @@ cloud_vpn_name: cvpn
 cloud_vpn_state: present
 cloud_vpn_pause_before_config_seconds: 30
 
+cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-initiator-keypair"
+cloud_vpn_responder_key_name: "{{ cloud_vpn_name }}-responder-keypair"
 cloud_vpn_tunnel_cidr: 169.254.56.24/30
 cloud_vpn_tunnel_failover_cidr: 169.254.56.28/30
 
