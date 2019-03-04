@@ -4,10 +4,31 @@ Ansible Network cloud_vpn
 
 .. _Ansible Network cloud_vpn_*working-copy*:
 
-v2.7.0
-==============
+v2.7.1
+======
 
-.. _Ansible Network cloud_vpn_*working-copy*_Major Changes:
+.. _Ansible Network cloud_vpn_v2.7.1_Minor Changes:
+
+Minor Changes
+-------------
+
+- Added unconfigure hooks
+
+- Removed autoinstall roles feature, users are expected to have provisioners/providers roles instead ahead of play
+
+- Added post-configure hooks
+
+- Added provisioner facts hooks
+
+- Added ability to consume a list of tunnels configs with cloud_vpn_tunnels
+
+
+.. _Ansible Network cloud_vpn_v2.7.0:
+
+v2.7.0
+======
+
+.. _Ansible Network cloud_vpn_v2.7.0_Major Changes:
 
 Major Changes
 -------------
@@ -15,7 +36,7 @@ Major Changes
 - Ansible 2.7 release of the ``cloud_vpn`` Ansible role.
 
 
-.. _Ansible Network cloud_vpn_*working-copy*_Minor Changes:
+.. _Ansible Network cloud_vpn_v2.7.0_Minor Changes:
 
 Minor Changes
 -------------

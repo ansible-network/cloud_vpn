@@ -1,0 +1,7 @@
+---
+minor_changes:
+  - Added unconfigure hooks
+  - Removed autoinstall roles feature, users are expected to have provisioners/providers roles instead ahead of play
+  - Added post-configure hooks
+  - Added provisioner facts hooks
+  - Added ability to consume a list of tunnels configs with cloud_vpn_tunnels
