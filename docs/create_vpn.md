@@ -4,6 +4,7 @@ The `create_vpn` function allows the operator to create an IPSEC VPN
 between two peers.
 This function can either configure a VPN against two peers that are already
 provisioned or they can also be provisioned dynamically.
+Below a few examples for certain scenarios, more available at *docs/vars_examples* folder.
 
 ## Create IPSEC VPN between an on-premise VyOS device and AWS VPN
 
