@@ -1,0 +1,22 @@
+---
+cloud_vpn_responder_provider_role: rhel
+cloud_vpn_responder_provider: rhel
+cloud_vpn_responder_provisioner_role: openstack
+cloud_vpn_responder_provisioner: openstack
+cloud_vpn_responder_ssh_private_key_file: /home/ricky/.ssh/id_rsa
+cloud_vpn_responder_key_name: rcarrillocruz
+cloud_vpn_responder_image_id: CentOS-7-x86_64-GenericCloud-1804_02
+cloud_vpn_responder_instance_size: m1.small
+cloud_vpn_responder_openstack_cloud: rdo-cloud
+cloud_vpn_responder_floating_network_id: 38.145.32.0/22
+
+cloud_vpn_initiator_provider_role: rhel
+cloud_vpn_initiator_provider: rhel
+cloud_vpn_initiator_provisioner_role: openstack
+cloud_vpn_initiator_provisioner: openstack
+cloud_vpn_initiator_ssh_private_key_file: /home/ricky/.ssh/id_rsa
+cloud_vpn_initiator_key_name: rcarrillocruz
+cloud_vpn_initiator_image_id: CentOS-7-x86_64-GenericCloud-1804_02
+cloud_vpn_initiator_instance_size: m1.small
+cloud_vpn_initiator_openstack_cloud: rdo-cloud
+cloud_vpn_initiator_floating_network_id: 38.145.32.0/22

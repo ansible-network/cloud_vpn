@@ -22,6 +22,7 @@ upfront to be used by cloud_vpn. Check it out links below.
 ## Supported VPN endpoints
 
 * [AWS VPN](https://github.com/ansible-network/aws)
+* [Azure VPN](https://github.com/ansible-network/azure)
 * [VyOS](https://github.com/ansible-network/vyos)
 * [Cisco CSR](https://github.com/ansible-network/cisco_ios)
 * [RHEL/CentOS](https://github.com/ansible-network/rhel)
