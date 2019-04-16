@@ -1,5 +1,6 @@
 AUTHORS
 ChangeLog
+releasenotes/build/
 tests/*.retry
 tests/output/
 tests/secrets.yaml
