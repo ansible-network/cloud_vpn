@@ -4,6 +4,7 @@ cloud_vpn
 This Ansible Network role provides functions to manage IPSEC VPN tunnels.
 
 The functions included allow to:
+
 * Configure IPSEC in multiple networking platforms and VPNaaS providers.
 * Provision networking appliances in public and private
   cloud providers.
