@@ -9,8 +9,15 @@ cloud_vpn_name: cvpn
 cloud_vpn_state: present
 cloud_vpn_pause_before_config_seconds: 30
 
+cloud_vpn_initiator_securitygroup_name: "{{ cloud_vpn_name }}-initiator-securitygroup"
+cloud_vpn_responder_securitygroup_name: "{{ cloud_vpn_name }}-responder-securitygroup"
+
+cloud_vpn_initiator_instance_name: "{{ cloud_vpn_name }}-initiator-instance"
+cloud_vpn_responder_instance_name: "{{ cloud_vpn_name }}-responder-instance"
+
 cloud_vpn_initiator_key_name: "{{ cloud_vpn_name }}-initiator-keypair"
 cloud_vpn_responder_key_name: "{{ cloud_vpn_name }}-responder-keypair"
+
 cloud_vpn_tunnel_cidr: 169.254.56.24/30
 cloud_vpn_tunnel_failover_cidr: 169.254.56.28/30
 
@@ -28,3 +35,14 @@ cloud_vpn_responder_cidr: 192.168.0.0/24
 cloud_vpn_responder_private_ip: 192.168.0.10
 cloud_vpn_responder_tunnel_ip: 169.254.56.26
 cloud_vpn_responder_bgp_asn: 65001
+
+
+cloud_vpn_responder_vpc_name: "{{ cloud_vpn_name }}-responder-vpc"
+cloud_vpn_responder_subnet_name: "{{ cloud_vpn_name }}-responder-subnet"
+cloud_vpn_responder_routetable_name: "{{ cloud_vpn_name }}-responder-routetable"
+cloud_vpn_responder_internetgateway_name: "{{ cloud_vpn_name }}-responder-internetgw"
+
+cloud_vpn_initiator_vpc_name: "{{ cloud_vpn_name }}-initiator-vpc"
+cloud_vpn_initiator_subnet_name: "{{ cloud_vpn_name }}-initiator-subnet"
+cloud_vpn_initiator_routetable_name: "{{ cloud_vpn_name }}-initiator-routetable"
+cloud_vpn_initiator_internetgateway_name: "{{ cloud_vpn_name }}-initiator-internetgw"
