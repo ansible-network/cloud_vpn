@@ -1,10 +1,9 @@
 ---
-
-- name: Include pre configure initiator hooks tasks
+- name: "Include pre configure initiator hooks tasks"
   include_tasks: "{{ cloud_vpn_initiator_pre_configure_hooks }}"
   when: cloud_vpn_initiator_pre_configure_hooks is defined
 
-- name: Include pre configure initiator hooks role
-  include_role: 
+- name: "Include pre configure initiator hooks role"
+  include_role:
     name: "{{ cloud_vpn_initiator_pre_configure_hooks_role }}"
   when: cloud_vpn_initiator_pre_configure_hooks_role is defined

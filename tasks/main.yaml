@@ -1,6 +1,5 @@
 ---
-
-- name: set role supported functions
+- name: "set role supported functions"
   set_fact:
     cloud_vpn_functions:
       - add_host_initiator
@@ -33,7 +32,7 @@
       - unconfigure_initiator
       - unconfigure_responder
 
-- name: validate the requested function is supported
+- name: "validate the requested function is supported"
   fail:
     msg: "invalid function specified, expected one of {{ cloud_vpn_functions }}, got {{ function }}"
   when: function | default('run') not in cloud_vpn_functions
