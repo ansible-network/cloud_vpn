@@ -34,9 +34,8 @@
 
 - name: "validate the requested function is supported"
   fail:
-    msg: "invalid function specified, expected one of {{ cloud_vpn_functions }}, got {{ function }}"
+    msg: "expected one of {{ cloud_vpn_functions }}, got {{ function }}"
   when: function | default('run') not in cloud_vpn_functions
 
 - name: include function specific tasks and run
   include_tasks: "{{ function  | default('run') }}.yaml"
-
