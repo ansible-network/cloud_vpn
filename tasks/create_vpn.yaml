@@ -20,6 +20,12 @@
 - name: Include add host initiator tasks
   include_tasks: add_host_initiator.yaml
 
+- name: Include pre configure initiator hooks tasks
+  include_tasks: pre_configure_initiator_hooks.yaml
+
+- name: Include pre configure responder hooks tasks
+  include_tasks: pre_configure_responder_hooks.yaml
+
 - name: Include configure vpn responder tasks
   include_tasks: configure_vpn_responder.yaml
 

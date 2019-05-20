@@ -1,0 +1,10 @@
+---
+
+- name: Include pre configure responder hooks tasks
+  include_tasks: "{{ cloud_vpn_responder_pre_configure_hooks }}"
+  when: cloud_vpn_responder_pre_configure_hooks is defined
+
+- name: Include pre configure responder hooks role
+  include_role:
+    name: "{{ cloud_vpn_responder_pre_configure_hooks_role }}"
+  when: cloud_vpn_responder_pre_configure_hooks_role is defined

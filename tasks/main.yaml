@@ -1,19 +1,41 @@
 ---
+- name: "set role supported functions"
+  set_fact:
+    cloud_vpn_functions:
+      - add_host_initiator
+      - add_host_responder
+      - configure_routing_initiator
+      - configure_routing_responder
+      - configure_vpn_initiator
+      - configure_vpn_responder
+      - create_vpn
+      - delete_vpn
+      - deprovision_initiator
+      - deprovision_responder
+      - get_provisioner_facts_initiator
+      - get_provisioner_facts_responder
+      - get_vpn_facts
+      - install_pip_requirements
+      - load_initiator_defaults
+      - load_responder_defaults
+      - loop_tunnels
+      - post_configure_initiator_hooks
+      - post_configure_responder_hooks
+      - pre_configure_initiator_hooks
+      - pre_configure_responder_hooks
+      - process_tunnel
+      - provision_initiator
+      - provision_responder
+      - run
+      - show_login_info_initiator
+      - show_login_info_responder
+      - unconfigure_initiator
+      - unconfigure_responder
 
-- name: Install required pip packages
-  include_tasks: install_pip_requirements.yaml
-  when: cloud_vpn_install_pip_requirements
+- name: "validate the requested function is supported"
+  fail:
+    msg: "expected one of {{ cloud_vpn_functions }}, got {{ function }}"
+  when: function | default('run') not in cloud_vpn_functions
 
-- name: Include loop tunnels tasks
-  include_tasks: loop_tunnels.yaml
-  when: cloud_vpn_tunnels is defined
-
-- block:
-    - name: Include create VPN tasks
-      include_tasks: create_vpn.yaml
-      when: cloud_vpn_state == 'present'
-
-    - name: Include delete VPN tasks
-      include_tasks: delete_vpn.yaml
-      when: cloud_vpn_state == 'absent'
-  when: cloud_vpn_tunnels is not defined
+- name: include function specific tasks and run
+  include_tasks: "{{ function  | default('run') }}.yaml"
